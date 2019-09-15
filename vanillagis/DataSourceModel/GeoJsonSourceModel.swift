@@ -15,9 +15,7 @@ struct GeoJsonSourceModel:DataSourceModel {
     
     init(filepath:URL){
         self.filepath = filepath
-        if self.type == nil {
-            self.type = self.getType()
-        }
+        self.type = self.getType()
     }
     
     func loadGeoJson() -> Data {
@@ -73,35 +71,38 @@ struct GeoJsonSourceModel:DataSourceModel {
     func makeLayer() -> MGLStyleLayer {
         let source = self.makeSource()
         
-        //random color
-        let redValue = CGFloat(Int.random(in:0..<256))
-        let greenValue = CGFloat(Int.random(in:0..<256))
-        let blueValue = CGFloat(Int.random(in:0..<256))
-        let color = NSExpression(forConstantValue: UIColor(red: redValue/255, green: greenValue/255, blue: blueValue/255, alpha: 1))
-        
         //make a layer depending layer type
         //Geojson type will have classfied as one of three layer types in self.getType().
         switch self.type {
         case "polyline":
             let layer = MGLLineStyleLayer(identifier: self.type!, source: source)
-            layer.lineColor = color
+            layer.lineColor = self.randomColor()
             layer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", [14: 2, 18: 20])
             return layer
             
         case "polygon":
             let layer = MGLFillStyleLayer(identifier: self.type!, source: source)
+            let color:NSExpression = self.randomColor()
+            layer.fillOutlineColor = color
             layer.fillColor = color
             layer.fillOpacity = NSExpression(forConstantValue: 0.5)
-            layer.fillOutlineColor = NSExpression(forConstantValue: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
             return layer
             
         default:
             let layer = MGLCircleStyleLayer(identifier: self.type!, source: source)
-            layer.circleColor = color
+            layer.circleColor = self.randomColor()
             layer.circleRadius = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'exponential', 1.75, %@)",
                                               [12: 20,
                                                22: 300])
             return layer
         }
+    }
+    
+    private func randomColor() -> NSExpression {
+        let redValue = CGFloat(Int.random(in:0..<256))
+        let greenValue = CGFloat(Int.random(in:0..<256))
+        let blueValue = CGFloat(Int.random(in:0..<256))
+        let color = NSExpression(forConstantValue: UIColor(red: redValue/255, green: greenValue/255, blue: blueValue/255, alpha: 1))
+        return color
     }
 }
