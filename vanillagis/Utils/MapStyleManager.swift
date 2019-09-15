@@ -8,21 +8,29 @@
 
 import Foundation
 
-class MapStyleManager {
-    var style:[String:Any] = [
+struct MapStyleManager {
+    private var style:[String:Any] = [
         "version":8,
         "sources":[],
         "layers":[],
     ]
     
-    func apllyDefault() {
+    mutating func apllyDefault() {
         let defaultName = "国土地理院"
         let defaultTileUrl = "https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"
         let defaultAttributionUrl = "https://maps.gsi.go.jp/development/ichiran.html"
         self.setBasemap(name: defaultName, tileUrlStr: defaultTileUrl, attributionUrl:defaultAttributionUrl)
     }
     
-    func setBasemap(name:String, tileUrlStr:String, attributionUrl:String="", tileSize:Int=256) {
+    func getStyle() -> [String:Any] {
+        return self.style
+    }
+    
+    mutating func setStyle(styleDict:[String:Any]) {
+        self.style = styleDict
+    }
+    
+    mutating func setBasemap(name:String, tileUrlStr:String, attributionUrl:String="", tileSize:Int=256) {
         let sources = [
             name:[
                 "type":"raster",

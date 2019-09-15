@@ -26,7 +26,7 @@ class FirstViewController: UIViewController {
     
     @objc func pushNewButton(sender: UIButton){
         let mapVc = MapViewController()
-        var newMapModel = NewMapModel(name: "New Map")
+        var newMapModel = MapModel(name: "New Map")
         
         let jsonUrl:URL = Bundle.main.url(forResource: "sample", withExtension: "geojson")!
         let geojson = GeoJsonSourceModel(filepath:jsonUrl)

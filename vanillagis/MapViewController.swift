@@ -19,8 +19,8 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     }
     
     func initMapView() {
-        let msManager = MapStyleManager()
-        msManager.apllyDefault()
+        var msManager = MapStyleManager()
+        msManager.setStyle(styleDict: mapModel.style)
         let tmpStyleUrl = msManager.writeJson(outputDir: "/tmp", filename: "tmp")
         
         mapView = MGLMapView(frame: view.bounds, styleURL: tmpStyleUrl!)

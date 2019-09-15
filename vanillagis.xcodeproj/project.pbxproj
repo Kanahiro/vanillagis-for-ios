@@ -17,10 +17,10 @@
 		9306722A231E9CC0004F1CCA /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 93067229231E9CC0004F1CCA /* default.json */; };
 		9306722C231EAA52004F1CCA /* sample.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 9306722B231EAA52004F1CCA /* sample.geojson */; };
 		93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350158232143C6006CFCCA /* DataSourceModel.swift */; };
-		93350164232A2EA9006CFCCA /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350163232A2EA9006CFCCA /* MapModel.swift */; };
+		93350164232A2EA9006CFCCA /* TestMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350163232A2EA9006CFCCA /* TestMapModel.swift */; };
 		93350167232A37D7006CFCCA /* GeoJsonSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */; };
 		9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016B232B240D006CFCCA /* FirstViewController.swift */; };
-		9335016E232B7D31006CFCCA /* NewMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016D232B7D31006CFCCA /* NewMapModel.swift */; };
+		9335016E232B7D31006CFCCA /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016D232B7D31006CFCCA /* MapModel.swift */; };
 		93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350170232BBEC9006CFCCA /* MapStyleManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,10 +60,10 @@
 		93067229231E9CC0004F1CCA /* default.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
 		9306722B231EAA52004F1CCA /* sample.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample.geojson; sourceTree = "<group>"; };
 		93350158232143C6006CFCCA /* DataSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceModel.swift; sourceTree = "<group>"; };
-		93350163232A2EA9006CFCCA /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		93350163232A2EA9006CFCCA /* TestMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMapModel.swift; sourceTree = "<group>"; };
 		93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonSourceModel.swift; sourceTree = "<group>"; };
 		9335016B232B240D006CFCCA /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		9335016D232B7D31006CFCCA /* NewMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMapModel.swift; sourceTree = "<group>"; };
+		9335016D232B7D31006CFCCA /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		93350170232BBEC9006CFCCA /* MapStyleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyleManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,8 +171,8 @@
 		93350168232A450C006CFCCA /* MapModel */ = {
 			isa = PBXGroup;
 			children = (
-				93350163232A2EA9006CFCCA /* MapModel.swift */,
-				9335016D232B7D31006CFCCA /* NewMapModel.swift */,
+				93350163232A2EA9006CFCCA /* TestMapModel.swift */,
+				9335016D232B7D31006CFCCA /* MapModel.swift */,
 			);
 			path = MapModel;
 			sourceTree = "<group>";
@@ -370,9 +370,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93350164232A2EA9006CFCCA /* MapModel.swift in Sources */,
+				93350164232A2EA9006CFCCA /* TestMapModel.swift in Sources */,
 				93350167232A37D7006CFCCA /* GeoJsonSourceModel.swift in Sources */,
-				9335016E232B7D31006CFCCA /* NewMapModel.swift in Sources */,
+				9335016E232B7D31006CFCCA /* MapModel.swift in Sources */,
 				93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */,
 				9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */,
 				93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */,
