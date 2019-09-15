@@ -1,0 +1,707 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1DA55D0E5201D59C168BE9F9 /* libPods-vanillagis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C309FB50AF27784CFFB1DA4 /* libPods-vanillagis.a */; };
+		9301CF2C231D37CF007B8FBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9301CF2B231D37CF007B8FBD /* AppDelegate.swift */; };
+		9301CF2E231D37CF007B8FBD /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9301CF2D231D37CF007B8FBD /* MapViewController.swift */; };
+		9301CF33231D37D1007B8FBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9301CF32231D37D1007B8FBD /* Assets.xcassets */; };
+		9301CF36231D37D1007B8FBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9301CF34231D37D1007B8FBD /* LaunchScreen.storyboard */; };
+		9301CF41231D37D1007B8FBD /* vanillagisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9301CF40231D37D1007B8FBD /* vanillagisTests.swift */; };
+		9301CF4C231D37D2007B8FBD /* vanillagisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9301CF4B231D37D2007B8FBD /* vanillagisUITests.swift */; };
+		9306722A231E9CC0004F1CCA /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 93067229231E9CC0004F1CCA /* default.json */; };
+		9306722C231EAA52004F1CCA /* sample.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 9306722B231EAA52004F1CCA /* sample.geojson */; };
+		93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350158232143C6006CFCCA /* DataSourceModel.swift */; };
+		93350164232A2EA9006CFCCA /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350163232A2EA9006CFCCA /* MapModel.swift */; };
+		93350167232A37D7006CFCCA /* GeoJsonSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */; };
+		9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016B232B240D006CFCCA /* FirstViewController.swift */; };
+		9335016E232B7D31006CFCCA /* NewMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016D232B7D31006CFCCA /* NewMapModel.swift */; };
+		93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350170232BBEC9006CFCCA /* MapStyleManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9301CF3D231D37D1007B8FBD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9301CF20231D37CF007B8FBD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9301CF27231D37CF007B8FBD;
+			remoteInfo = vanillagis;
+		};
+		9301CF48231D37D2007B8FBD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9301CF20231D37CF007B8FBD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9301CF27231D37CF007B8FBD;
+			remoteInfo = vanillagis;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4F9F5F9C1185112342FDEAAB /* Pods-vanillagis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vanillagis.debug.xcconfig"; path = "Target Support Files/Pods-vanillagis/Pods-vanillagis.debug.xcconfig"; sourceTree = "<group>"; };
+		80424D941E6767395423E4D4 /* Pods-vanillagis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vanillagis.release.xcconfig"; path = "Target Support Files/Pods-vanillagis/Pods-vanillagis.release.xcconfig"; sourceTree = "<group>"; };
+		8C309FB50AF27784CFFB1DA4 /* libPods-vanillagis.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vanillagis.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9301CF28231D37CF007B8FBD /* vanillagis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vanillagis.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9301CF2B231D37CF007B8FBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9301CF2D231D37CF007B8FBD /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		9301CF32231D37D1007B8FBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9301CF35231D37D1007B8FBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9301CF37231D37D1007B8FBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9301CF3C231D37D1007B8FBD /* vanillagisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vanillagisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9301CF40231D37D1007B8FBD /* vanillagisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vanillagisTests.swift; sourceTree = "<group>"; };
+		9301CF42231D37D1007B8FBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9301CF47231D37D2007B8FBD /* vanillagisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vanillagisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9301CF4B231D37D2007B8FBD /* vanillagisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vanillagisUITests.swift; sourceTree = "<group>"; };
+		9301CF4D231D37D2007B8FBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93067229231E9CC0004F1CCA /* default.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
+		9306722B231EAA52004F1CCA /* sample.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample.geojson; sourceTree = "<group>"; };
+		93350158232143C6006CFCCA /* DataSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceModel.swift; sourceTree = "<group>"; };
+		93350163232A2EA9006CFCCA /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonSourceModel.swift; sourceTree = "<group>"; };
+		9335016B232B240D006CFCCA /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		9335016D232B7D31006CFCCA /* NewMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMapModel.swift; sourceTree = "<group>"; };
+		93350170232BBEC9006CFCCA /* MapStyleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyleManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9301CF25231D37CF007B8FBD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DA55D0E5201D59C168BE9F9 /* libPods-vanillagis.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9301CF39231D37D1007B8FBD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9301CF44231D37D2007B8FBD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4CD9EA583BEB7850CDDC908C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C309FB50AF27784CFFB1DA4 /* libPods-vanillagis.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9301CF1F231D37CF007B8FBD = {
+			isa = PBXGroup;
+			children = (
+				9301CF2A231D37CF007B8FBD /* vanillagis */,
+				9301CF3F231D37D1007B8FBD /* vanillagisTests */,
+				9301CF4A231D37D2007B8FBD /* vanillagisUITests */,
+				9301CF29231D37CF007B8FBD /* Products */,
+				FCA04DEA1E706714F4867CF6 /* Pods */,
+				4CD9EA583BEB7850CDDC908C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9301CF29231D37CF007B8FBD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9301CF28231D37CF007B8FBD /* vanillagis.app */,
+				9301CF3C231D37D1007B8FBD /* vanillagisTests.xctest */,
+				9301CF47231D37D2007B8FBD /* vanillagisUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9301CF2A231D37CF007B8FBD /* vanillagis */ = {
+			isa = PBXGroup;
+			children = (
+				9301CF2B231D37CF007B8FBD /* AppDelegate.swift */,
+				9335016B232B240D006CFCCA /* FirstViewController.swift */,
+				9301CF2D231D37CF007B8FBD /* MapViewController.swift */,
+				9335016F232BBEAF006CFCCA /* Utils */,
+				93350165232A36CE006CFCCA /* DataSourceModel */,
+				93350168232A450C006CFCCA /* MapModel */,
+				9301CF32231D37D1007B8FBD /* Assets.xcassets */,
+				9301CF34231D37D1007B8FBD /* LaunchScreen.storyboard */,
+				9301CF37231D37D1007B8FBD /* Info.plist */,
+				93067229231E9CC0004F1CCA /* default.json */,
+				9306722B231EAA52004F1CCA /* sample.geojson */,
+			);
+			path = vanillagis;
+			sourceTree = "<group>";
+		};
+		9301CF3F231D37D1007B8FBD /* vanillagisTests */ = {
+			isa = PBXGroup;
+			children = (
+				9301CF40231D37D1007B8FBD /* vanillagisTests.swift */,
+				9301CF42231D37D1007B8FBD /* Info.plist */,
+			);
+			path = vanillagisTests;
+			sourceTree = "<group>";
+		};
+		9301CF4A231D37D2007B8FBD /* vanillagisUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9301CF4B231D37D2007B8FBD /* vanillagisUITests.swift */,
+				9301CF4D231D37D2007B8FBD /* Info.plist */,
+			);
+			path = vanillagisUITests;
+			sourceTree = "<group>";
+		};
+		93350165232A36CE006CFCCA /* DataSourceModel */ = {
+			isa = PBXGroup;
+			children = (
+				93350158232143C6006CFCCA /* DataSourceModel.swift */,
+				93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */,
+			);
+			path = DataSourceModel;
+			sourceTree = "<group>";
+		};
+		93350168232A450C006CFCCA /* MapModel */ = {
+			isa = PBXGroup;
+			children = (
+				93350163232A2EA9006CFCCA /* MapModel.swift */,
+				9335016D232B7D31006CFCCA /* NewMapModel.swift */,
+			);
+			path = MapModel;
+			sourceTree = "<group>";
+		};
+		9335016F232BBEAF006CFCCA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				93350170232BBEC9006CFCCA /* MapStyleManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		FCA04DEA1E706714F4867CF6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4F9F5F9C1185112342FDEAAB /* Pods-vanillagis.debug.xcconfig */,
+				80424D941E6767395423E4D4 /* Pods-vanillagis.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9301CF27231D37CF007B8FBD /* vanillagis */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9301CF50231D37D2007B8FBD /* Build configuration list for PBXNativeTarget "vanillagis" */;
+			buildPhases = (
+				148A98559426C4E4F13D8D4F /* [CP] Check Pods Manifest.lock */,
+				9301CF24231D37CF007B8FBD /* Sources */,
+				9301CF25231D37CF007B8FBD /* Frameworks */,
+				9301CF26231D37CF007B8FBD /* Resources */,
+				563F86C277207DD1BC07FAF5 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vanillagis;
+			productName = vanillagis;
+			productReference = 9301CF28231D37CF007B8FBD /* vanillagis.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9301CF3B231D37D1007B8FBD /* vanillagisTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9301CF53231D37D2007B8FBD /* Build configuration list for PBXNativeTarget "vanillagisTests" */;
+			buildPhases = (
+				9301CF38231D37D1007B8FBD /* Sources */,
+				9301CF39231D37D1007B8FBD /* Frameworks */,
+				9301CF3A231D37D1007B8FBD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9301CF3E231D37D1007B8FBD /* PBXTargetDependency */,
+			);
+			name = vanillagisTests;
+			productName = vanillagisTests;
+			productReference = 9301CF3C231D37D1007B8FBD /* vanillagisTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9301CF46231D37D2007B8FBD /* vanillagisUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9301CF56231D37D2007B8FBD /* Build configuration list for PBXNativeTarget "vanillagisUITests" */;
+			buildPhases = (
+				9301CF43231D37D2007B8FBD /* Sources */,
+				9301CF44231D37D2007B8FBD /* Frameworks */,
+				9301CF45231D37D2007B8FBD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9301CF49231D37D2007B8FBD /* PBXTargetDependency */,
+			);
+			name = vanillagisUITests;
+			productName = vanillagisUITests;
+			productReference = 9301CF47231D37D2007B8FBD /* vanillagisUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9301CF20231D37CF007B8FBD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = Labo288;
+				TargetAttributes = {
+					9301CF27231D37CF007B8FBD = {
+						CreatedOnToolsVersion = 10.3;
+					};
+					9301CF3B231D37D1007B8FBD = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = 9301CF27231D37CF007B8FBD;
+					};
+					9301CF46231D37D2007B8FBD = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = 9301CF27231D37CF007B8FBD;
+					};
+				};
+			};
+			buildConfigurationList = 9301CF23231D37CF007B8FBD /* Build configuration list for PBXProject "vanillagis" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9301CF1F231D37CF007B8FBD;
+			productRefGroup = 9301CF29231D37CF007B8FBD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9301CF27231D37CF007B8FBD /* vanillagis */,
+				9301CF3B231D37D1007B8FBD /* vanillagisTests */,
+				9301CF46231D37D2007B8FBD /* vanillagisUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9301CF26231D37CF007B8FBD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9301CF36231D37D1007B8FBD /* LaunchScreen.storyboard in Resources */,
+				9301CF33231D37D1007B8FBD /* Assets.xcassets in Resources */,
+				9306722C231EAA52004F1CCA /* sample.geojson in Resources */,
+				9306722A231E9CC0004F1CCA /* default.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9301CF3A231D37D1007B8FBD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9301CF45231D37D2007B8FBD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		148A98559426C4E4F13D8D4F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-vanillagis-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		563F86C277207DD1BC07FAF5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-vanillagis/Pods-vanillagis-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-vanillagis/Pods-vanillagis-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-vanillagis/Pods-vanillagis-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9301CF24231D37CF007B8FBD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93350164232A2EA9006CFCCA /* MapModel.swift in Sources */,
+				93350167232A37D7006CFCCA /* GeoJsonSourceModel.swift in Sources */,
+				9335016E232B7D31006CFCCA /* NewMapModel.swift in Sources */,
+				93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */,
+				9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */,
+				93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */,
+				9301CF2E231D37CF007B8FBD /* MapViewController.swift in Sources */,
+				9301CF2C231D37CF007B8FBD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9301CF38231D37D1007B8FBD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9301CF41231D37D1007B8FBD /* vanillagisTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9301CF43231D37D2007B8FBD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9301CF4C231D37D2007B8FBD /* vanillagisUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9301CF3E231D37D1007B8FBD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9301CF27231D37CF007B8FBD /* vanillagis */;
+			targetProxy = 9301CF3D231D37D1007B8FBD /* PBXContainerItemProxy */;
+		};
+		9301CF49231D37D2007B8FBD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9301CF27231D37CF007B8FBD /* vanillagis */;
+			targetProxy = 9301CF48231D37D2007B8FBD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9301CF34231D37D1007B8FBD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9301CF35231D37D1007B8FBD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9301CF4E231D37D2007B8FBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9301CF4F231D37D2007B8FBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9301CF51231D37D2007B8FBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F9F5F9C1185112342FDEAAB /* Pods-vanillagis.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8WN4A2PC78;
+				INFOPLIST_FILE = vanillagis/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagis;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9301CF52231D37D2007B8FBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80424D941E6767395423E4D4 /* Pods-vanillagis.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8WN4A2PC78;
+				INFOPLIST_FILE = vanillagis/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagis;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9301CF54231D37D2007B8FBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8WN4A2PC78;
+				INFOPLIST_FILE = vanillagisTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vanillagis.app/vanillagis";
+			};
+			name = Debug;
+		};
+		9301CF55231D37D2007B8FBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8WN4A2PC78;
+				INFOPLIST_FILE = vanillagisTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vanillagis.app/vanillagis";
+			};
+			name = Release;
+		};
+		9301CF57231D37D2007B8FBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8WN4A2PC78;
+				INFOPLIST_FILE = vanillagisUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagisUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = vanillagis;
+			};
+			name = Debug;
+		};
+		9301CF58231D37D2007B8FBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8WN4A2PC78;
+				INFOPLIST_FILE = vanillagisUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagisUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = vanillagis;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9301CF23231D37CF007B8FBD /* Build configuration list for PBXProject "vanillagis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9301CF4E231D37D2007B8FBD /* Debug */,
+				9301CF4F231D37D2007B8FBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9301CF50231D37D2007B8FBD /* Build configuration list for PBXNativeTarget "vanillagis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9301CF51231D37D2007B8FBD /* Debug */,
+				9301CF52231D37D2007B8FBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9301CF53231D37D2007B8FBD /* Build configuration list for PBXNativeTarget "vanillagisTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9301CF54231D37D2007B8FBD /* Debug */,
+				9301CF55231D37D2007B8FBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9301CF56231D37D2007B8FBD /* Build configuration list for PBXNativeTarget "vanillagisUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9301CF57231D37D2007B8FBD /* Debug */,
+				9301CF58231D37D2007B8FBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9301CF20231D37CF007B8FBD /* Project object */;
+}
