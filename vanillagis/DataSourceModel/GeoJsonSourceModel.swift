@@ -15,6 +15,7 @@ struct GeoJsonSourceModel:DataSourceModel {
     
     init(filepath:URL){
         self.filepath = filepath
+        self.type = self.getType()
     }
     
     func loadGeoJson() -> Data {
@@ -26,7 +27,22 @@ struct GeoJsonSourceModel:DataSourceModel {
     }
     
     func getType() -> String {
-        return "point"
+        let jsonData:Data = self.loadGeoJson()
+        guard let jsonObj = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String:Any] else {
+            preconditionFailure("Failed to parse JSON file")
+        }
+        
+        if jsonObj["type"] as? String != "FeatureCollection" {
+            let geometry = jsonObj["geometry"] as! [String:Any]
+            let featureType = geometry["type"]
+            return featureType as! String
+        } else {
+            let features = jsonObj["features"] as! [[String:Any]]
+            let firstFeature = features[0]
+            let firstFeatureGeom = firstFeature["geometry"] as! [String:Any]
+            let firstFeatureType = firstFeatureGeom["type"]
+            return firstFeatureType as! String
+        }
     }
     
     func makeSource() -> MGLShapeSource {

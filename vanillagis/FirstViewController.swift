@@ -28,8 +28,9 @@ class FirstViewController: UIViewController {
         let mapVc = MapViewController()
         var newMapModel = MapModel(name: "New Map")
         
-        let jsonUrl:URL = Bundle.main.url(forResource: "sample", withExtension: "geojson")!
+        let jsonUrl:URL = Bundle.main.url(forResource: "sample2", withExtension: "geojson")!
         let geojson = GeoJsonSourceModel(filepath:jsonUrl)
+        print(geojson.getType())
         let source = geojson.makeSource()
         let layer = geojson.makeLayer()
         
