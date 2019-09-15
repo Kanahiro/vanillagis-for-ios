@@ -65,7 +65,7 @@
 		9335016D232B7D31006CFCCA /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		93350170232BBEC9006CFCCA /* MapStyleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyleManager.swift; sourceTree = "<group>"; };
 		93350172232E5876006CFCCA /* ShapefileSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapefileSourceModel.swift; sourceTree = "<group>"; };
-		93350174232E63E1006CFCCA /* sample2.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample2.geojson; sourceTree = "<group>"; };
+		93350174232E63E1006CFCCA /* test.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.geojson; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +137,7 @@
 				9301CF34231D37D1007B8FBD /* LaunchScreen.storyboard */,
 				9301CF37231D37D1007B8FBD /* Info.plist */,
 				93067229231E9CC0004F1CCA /* default.json */,
-				93350174232E63E1006CFCCA /* sample2.geojson */,
+				93350174232E63E1006CFCCA /* test.geojson */,
 				9306722B231EAA52004F1CCA /* sample.geojson */,
 			);
 			path = vanillagis;
