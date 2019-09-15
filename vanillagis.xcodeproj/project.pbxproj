@@ -16,6 +16,7 @@
 		9301CF4C231D37D2007B8FBD /* vanillagisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9301CF4B231D37D2007B8FBD /* vanillagisUITests.swift */; };
 		9306722A231E9CC0004F1CCA /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 93067229231E9CC0004F1CCA /* default.json */; };
 		9306722C231EAA52004F1CCA /* sample.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 9306722B231EAA52004F1CCA /* sample.geojson */; };
+		93182A6F232E7201000DC0C1 /* test.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 93350174232E63E1006CFCCA /* test.geojson */; };
 		93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350158232143C6006CFCCA /* DataSourceModel.swift */; };
 		93350167232A37D7006CFCCA /* GeoJsonSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */; };
 		9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016B232B240D006CFCCA /* FirstViewController.swift */; };
@@ -302,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93182A6F232E7201000DC0C1 /* test.geojson in Resources */,
 				9301CF36231D37D1007B8FBD /* LaunchScreen.storyboard in Resources */,
 				9301CF33231D37D1007B8FBD /* Assets.xcassets in Resources */,
 				9306722C231EAA52004F1CCA /* sample.geojson in Resources */,

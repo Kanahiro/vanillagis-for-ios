@@ -11,11 +11,13 @@ import Mapbox
 
 struct GeoJsonSourceModel:DataSourceModel {
     let filepath:URL
-    var type:String = "polyline"
+    var type:String?
     
     init(filepath:URL){
         self.filepath = filepath
-        self.type = self.getType()
+        if self.type == nil {
+            self.type = self.getType()
+        }
     }
     
     func loadGeoJson() -> Data {
@@ -32,39 +34,74 @@ struct GeoJsonSourceModel:DataSourceModel {
             preconditionFailure("Failed to parse JSON file")
         }
         
+        //Parse Geojson and get a Geometry type
+        var jsonType:String?
         if jsonObj["type"] as? String != "FeatureCollection" {
             let geometry = jsonObj["geometry"] as! [String:Any]
             let featureType = geometry["type"]
-            return featureType as! String
+            jsonType = featureType as? String
         } else {
             let features = jsonObj["features"] as! [[String:Any]]
             let firstFeature = features[0]
             let firstFeatureGeom = firstFeature["geometry"] as! [String:Any]
             let firstFeatureType = firstFeatureGeom["type"]
-            return firstFeatureType as! String
+            jsonType = firstFeatureType as? String
         }
+        
+        //Convert the Geometry type into a Layer type and return
+        var layerType:String?
+        switch jsonType! {
+        case "LineString", "MultiLineString":
+            layerType = "polyline"
+        case "Polygon", "MultiPolygon":
+            layerType = "polygon"
+        default:
+            layerType = "point"
+        }
+        return layerType!
     }
     
     func makeSource() -> MGLShapeSource {
         let jsonData:Data = self.loadGeoJson()
-        // MGLMapView.style is optional, so you must guard against it not being set.
         guard let shapeFromGeoJSON = try? MGLShape(data: jsonData, encoding: String.Encoding.utf8.rawValue) else {
             fatalError("Could not generate MGLShape")
         }
-        let source = MGLShapeSource(identifier: self.type, shape: shapeFromGeoJSON, options: nil)
+        let source = MGLShapeSource(identifier: self.type!, shape: shapeFromGeoJSON, options: nil)
         return source
     }
     
     func makeLayer() -> MGLStyleLayer {
         let source = self.makeSource()
-        // Create new layer for the line.
-        let layer = MGLLineStyleLayer(identifier: self.type, source: source)
         
-        layer.lineColor = NSExpression(forConstantValue: UIColor(red: 59/255, green: 178/255, blue: 208/255, alpha: 1))
+        //random color
+        let redValue = CGFloat(Int.random(in:0..<256))
+        let greenValue = CGFloat(Int.random(in:0..<256))
+        let blueValue = CGFloat(Int.random(in:0..<256))
+        let color = NSExpression(forConstantValue: UIColor(red: redValue/255, green: greenValue/255, blue: blueValue/255, alpha: 1))
         
-        // Use `NSExpression` to smoothly adjust the line width from 2pt to 20pt between zoom levels 14 and 18. The `interpolationBase` parameter allows the values to interpolate along an exponential curve.
-        layer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", [14: 2, 18: 20])
-        
-        return layer
+        //make a layer depending layer type
+        //Geojson type will have classfied as one of three layer types in self.getType().
+        switch self.type {
+        case "polyline":
+            let layer = MGLLineStyleLayer(identifier: self.type!, source: source)
+            layer.lineColor = color
+            layer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", [14: 2, 18: 20])
+            return layer
+            
+        case "polygon":
+            let layer = MGLFillStyleLayer(identifier: self.type!, source: source)
+            layer.fillColor = color
+            layer.fillOpacity = NSExpression(forConstantValue: 0.5)
+            layer.fillOutlineColor = NSExpression(forConstantValue: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
+            return layer
+            
+        default:
+            let layer = MGLCircleStyleLayer(identifier: self.type!, source: source)
+            layer.circleColor = color
+            layer.circleRadius = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'exponential', 1.75, %@)",
+                                              [12: 20,
+                                               22: 300])
+            return layer
+        }
     }
 }

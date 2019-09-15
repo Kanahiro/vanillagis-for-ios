@@ -17,13 +17,13 @@ struct MapModel {
     
     init(name:String, style:[String:Any] = [:]) {
         self.name = name
-        self.style = style
-        
-        //if style empty, set default style
-        if self.style.count == 0 {
+        //if STYLE in argument is empty, set default style
+        if style.count == 0 {
             var mapStyleManager = MapStyleManager()
             mapStyleManager.apllyDefault()
             self.style = mapStyleManager.getStyle()
+        } else {
+            self.style = style
         }
     }
     
