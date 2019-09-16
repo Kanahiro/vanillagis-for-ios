@@ -26,21 +26,8 @@ class FirstViewController: UIViewController {
     
     @objc func pushNewButton(sender: UIButton){
         let mapVc = MapViewController()
-        var newMapModel = MapModel(name: "New Map")
-        
-        let jsonUrl:URL = Bundle.main.url(forResource: "test", withExtension: "geojson")!
-        print(jsonUrl)
-        let geojson = GeoJsonSourceModel(filepath:jsonUrl)
-        print(geojson.getType())
-        let source = geojson.makeSource()
-        let layer = geojson.makeLayer()
-        
-        newMapModel.appendSource(source: source)
-        newMapModel.appendLayer(layer: layer)
-        
+        let newMapModel = MapModel(name: "New Map")
         mapVc.mapModel = newMapModel
-        
-        
         present(mapVc, animated: true, completion: nil)
     }
     
@@ -56,15 +43,15 @@ class FirstViewController: UIViewController {
         } catch {
         }
         
-        //default.jsonを保存
         /*
-         let filename = "/default.json"
-         let filePath = documentsPath + stylesDir + filename
+        //default.jsonを保存
+         let filename = "/testest.geojson"
+         let filePath = documentsPath + geojsonsDir + filename
          if fm.fileExists(atPath: filePath) {return}
          
          var fileData:Data?
          do {
-         let fileUrl = Bundle.main.url(forResource: "default", withExtension: "json")
+         let fileUrl = Bundle.main.url(forResource: "sample", withExtension: "geojson")
          fileData = try Data(contentsOf: fileUrl!)
          } catch {
          fileData = nil

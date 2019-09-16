@@ -17,7 +17,6 @@ struct GeoJsonSourceModel:DataSourceModel {
         self.filepath = filepath
         self.type = self.getType()
     }
-    
     func loadGeoJson() -> Data {
         let jsonUrl = self.filepath
         guard let jsonData = try? Data(contentsOf: jsonUrl) else {

@@ -18,9 +18,14 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         self.initMapView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.mapModel.draw(mapView: self.mapView)
+    }
+
     func initMapView() {
         var msManager = MapStyleManager()
         msManager.setStyle(styleDict: mapModel.style)
+        //write temp-jsonfile as tmp.json, because MGLMapView needs styleURL to be initialized.
         let tmpStyleUrl = msManager.writeJson(outputDir: "/tmp", filename: "tmp")
         
         mapView = MGLMapView(frame: view.bounds, styleURL: tmpStyleUrl!)
@@ -32,8 +37,15 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         self.view.addSubview(mapView)
     }
     
+    //open documentsVC and add Layer to MapView
+    func addDocument() {
+        let docVc = DocumentsViewController()
+        docVc.directory = NSHomeDirectory() + "/Documents" + "/geojsons"
+        docVc.senderViewController = self
+        self.present(docVc, animated: true, completion: nil)
+    }
+    
     func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
-        mapModel.draw(mapView:self.mapView)
     }
     
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {

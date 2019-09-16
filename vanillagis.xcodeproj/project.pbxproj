@@ -17,6 +17,7 @@
 		9306722A231E9CC0004F1CCA /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 93067229231E9CC0004F1CCA /* default.json */; };
 		9306722C231EAA52004F1CCA /* sample.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 9306722B231EAA52004F1CCA /* sample.geojson */; };
 		93182A6F232E7201000DC0C1 /* test.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 93350174232E63E1006CFCCA /* test.geojson */; };
+		93182A71232F5AFC000DC0C1 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */; };
 		93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350158232143C6006CFCCA /* DataSourceModel.swift */; };
 		93350167232A37D7006CFCCA /* GeoJsonSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */; };
 		9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016B232B240D006CFCCA /* FirstViewController.swift */; };
@@ -60,6 +61,7 @@
 		9301CF4D231D37D2007B8FBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93067229231E9CC0004F1CCA /* default.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
 		9306722B231EAA52004F1CCA /* sample.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample.geojson; sourceTree = "<group>"; };
+		93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		93350158232143C6006CFCCA /* DataSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceModel.swift; sourceTree = "<group>"; };
 		93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonSourceModel.swift; sourceTree = "<group>"; };
 		9335016B232B240D006CFCCA /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				9301CF2B231D37CF007B8FBD /* AppDelegate.swift */,
 				9335016B232B240D006CFCCA /* FirstViewController.swift */,
 				9301CF2D231D37CF007B8FBD /* MapViewController.swift */,
+				93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */,
 				9335016F232BBEAF006CFCCA /* Utils */,
 				93350165232A36CE006CFCCA /* DataSourceModel */,
 				93350168232A450C006CFCCA /* MapModel */,
@@ -380,6 +383,7 @@
 				93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */,
 				9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */,
 				93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */,
+				93182A71232F5AFC000DC0C1 /* DocumentsViewController.swift in Sources */,
 				9301CF2E231D37CF007B8FBD /* MapViewController.swift in Sources */,
 				9301CF2C231D37CF007B8FBD /* AppDelegate.swift in Sources */,
 			);
@@ -552,7 +556,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8WN4A2PC78;
 				INFOPLIST_FILE = vanillagis/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -572,7 +576,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8WN4A2PC78;
 				INFOPLIST_FILE = vanillagis/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
