@@ -18,15 +18,19 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         self.initMapView()
     }
     
+    var test = false
     override func viewWillAppear(_ animated: Bool) {
         self.mapModel.draw(mapView: self.mapView)
+        if (test) { return }
+        test = true
+        self.addDocument()
     }
 
     func initMapView() {
         var msManager = MapStyleManager()
         msManager.setStyle(styleDict: mapModel.style)
         //write temp-jsonfile as tmp.json, because MGLMapView needs styleURL to be initialized.
-        let tmpStyleUrl = msManager.writeJson(outputDir: "/tmp", filename: "tmp")
+        let tmpStyleUrl = msManager.writeJson(outputDir: "/tmp", filename: "style")
         
         mapView = MGLMapView(frame: view.bounds, styleURL: tmpStyleUrl!)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -35,6 +39,11 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         mapView.delegate = self
         
         self.view.addSubview(mapView)
+    }
+    
+    func initUserLocation() {
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .none
     }
     
     //open documentsVC and add Layer to MapView
@@ -49,6 +58,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+        self.initUserLocation()
     }
     
 }

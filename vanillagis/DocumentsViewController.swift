@@ -13,32 +13,23 @@ import Foundation
 import UIKit
 
 class DocumentsViewController:UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    var tableView: UITableView!
     var directory:String!
     var senderViewController:MapViewController!
+    var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.initTableView()
+        self.initToolbar()
+    }
+    
+    func initTableView() {
         self.tableView = UITableView(frame: self.view.bounds, style: .plain)
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)
-        
-        var myToolbar: UIToolbar!
-        self.view.backgroundColor = UIColor.cyan
-        myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 40.0))
-        myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-20.0)
-        myToolbar.barStyle = UIBarStyle.blackTranslucent
-        myToolbar.tintColor = UIColor.white
-        myToolbar.backgroundColor = UIColor.black
-        let barCancelButton: UIBarButtonItem = UIBarButtonItem(title: "Cancel", style:.bordered, target: self, action: #selector(self.cancelButtonCilick(sender:)))
-        barCancelButton.tag = 1
-        myToolbar.items = [barCancelButton]
-        
-        self.view.addSubview(myToolbar)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,6 +62,21 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
         self.senderViewController.mapModel.appendLayer(layer: layer)
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func initToolbar() {
+        var myToolbar: UIToolbar!
+        self.view.backgroundColor = UIColor.cyan
+        myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 40.0))
+        myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-20.0)
+        myToolbar.barStyle = UIBarStyle.blackTranslucent
+        myToolbar.tintColor = UIColor.white
+        myToolbar.backgroundColor = UIColor.black
+        let barCancelButton: UIBarButtonItem = UIBarButtonItem(title: "Cancel", style:.bordered, target: self, action: #selector(self.cancelButtonCilick(sender:)))
+        barCancelButton.tag = 1
+        myToolbar.items = [barCancelButton]
+        
+        self.view.addSubview(myToolbar)
     }
     
     @objc func cancelButtonCilick(sender:UIBarButtonItem) {

@@ -18,6 +18,7 @@
 		9306722C231EAA52004F1CCA /* sample.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 9306722B231EAA52004F1CCA /* sample.geojson */; };
 		93182A6F232E7201000DC0C1 /* test.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 93350174232E63E1006CFCCA /* test.geojson */; };
 		93182A71232F5AFC000DC0C1 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */; };
+		93182A732330F39A000DC0C1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93182A722330F39A000DC0C1 /* CoreLocation.framework */; };
 		93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350158232143C6006CFCCA /* DataSourceModel.swift */; };
 		93350167232A37D7006CFCCA /* GeoJsonSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */; };
 		9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016B232B240D006CFCCA /* FirstViewController.swift */; };
@@ -62,6 +63,7 @@
 		93067229231E9CC0004F1CCA /* default.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
 		9306722B231EAA52004F1CCA /* sample.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample.geojson; sourceTree = "<group>"; };
 		93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
+		93182A722330F39A000DC0C1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		93350158232143C6006CFCCA /* DataSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceModel.swift; sourceTree = "<group>"; };
 		93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonSourceModel.swift; sourceTree = "<group>"; };
 		9335016B232B240D006CFCCA /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93182A732330F39A000DC0C1 /* CoreLocation.framework in Frameworks */,
 				1DA55D0E5201D59C168BE9F9 /* libPods-vanillagis.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +103,7 @@
 		4CD9EA583BEB7850CDDC908C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93182A722330F39A000DC0C1 /* CoreLocation.framework */,
 				8C309FB50AF27784CFFB1DA4 /* libPods-vanillagis.a */,
 			);
 			name = Frameworks;

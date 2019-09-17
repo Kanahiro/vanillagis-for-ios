@@ -14,13 +14,16 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.createDocumentDir()
-        
+        self.initNewButton()
+    }
+    
+    func initNewButton() {
         let newButton:UIButton = UIButton(frame: CGRect(x: 0, y: 50, width: self.view.frame.width, height: self.view.frame.height / 5))
         newButton.backgroundColor = .white
         newButton.setTitle("New Map", for: .normal)
         newButton.setTitleColor(.black, for: .normal)
         newButton.addTarget(self, action: #selector(pushNewButton), for: .touchUpInside)
-
+        
         self.view.addSubview(newButton)
     }
     
