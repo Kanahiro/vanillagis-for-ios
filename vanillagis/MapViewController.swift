@@ -15,15 +15,16 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = mapModel.name
+        
         self.initMapView()
+        self.initToolbar()
     }
     
-    var test = false
     override func viewWillAppear(_ animated: Bool) {
-        self.mapModel.draw(mapView: self.mapView)
-        if (test) { return }
-        test = true
-        self.addDocument()
+        print(self.mapView.style?.layers)
+        //self.mapModel.draw(mapView: self.mapView)
     }
 
     func initMapView() {
@@ -32,7 +33,13 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         //write temp-jsonfile as tmp.json, because MGLMapView needs styleURL to be initialized.
         let tmpStyleUrl = msManager.writeJson(outputDir: "/tmp", filename: "style")
         
-        mapView = MGLMapView(frame: view.bounds, styleURL: tmpStyleUrl!)
+        // ステータスバーの高さを取得
+        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+        // ナビゲーションバーの高さを取得
+        let navBarHeight = self.navigationController?.navigationBar.frame.size.height
+        
+        let rect = CGRect(x: 0, y: statusBarHeight + navBarHeight!, width: self.view.bounds.size.width, height: self.view.bounds.size.height - (statusBarHeight + navBarHeight! + 42))
+        mapView = MGLMapView(frame: rect, styleURL: tmpStyleUrl!)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.setCenter(CLLocationCoordinate2D(latitude: 44.2, longitude: 142.4), zoomLevel: 9, animated: false)
         
@@ -46,12 +53,50 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         mapView.userTrackingMode = .none
     }
     
+    func initToolbar() {
+        var myToolbar: UIToolbar!
+        self.view.backgroundColor = UIColor.white
+        myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 44.0))
+        myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-20.0)
+        myToolbar.barStyle = UIBarStyle.default
+        myToolbar.tintColor = UIColor.cyan
+        myToolbar.backgroundColor = UIColor.white
+        
+        let addIcon = UIImage(named: "icon_add.png")
+        let addButton: UIBarButtonItem = UIBarButtonItem(image : addIcon, style: UIBarButtonItem.Style.plain ,target: self, action: #selector(self.addDocument(sender:)))
+        addButton.tag = 1
+        
+        let saveIcon = UIImage(named: "icon_save.png")
+        let saveButton: UIBarButtonItem = UIBarButtonItem(image : saveIcon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.saveMap(sender:)))
+        saveButton.tag = 2
+        
+        let layerIcon = UIImage(named: "icon_layer.png")
+        let layerButton: UIBarButtonItem = UIBarButtonItem(image: layerIcon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.showLayer(sender:)))
+        layerButton.tag = 3
+        
+        let locateIcon = UIImage(named: "icon_locate.png")
+        let locateButton: UIBarButtonItem = UIBarButtonItem(image: locateIcon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.showLayer(sender:)))
+        layerButton.tag = 4
+        
+        myToolbar.items = [addButton, saveButton, layerButton, locateButton]
+        
+        self.view.addSubview(myToolbar)
+    }
+    
     //open documentsVC and add Layer to MapView
-    func addDocument() {
+    @objc func addDocument(sender:UIBarButtonItem) {
         let docVc = DocumentsViewController()
         docVc.directory = NSHomeDirectory() + "/Documents" + "/geojsons"
         docVc.senderViewController = self
         self.present(docVc, animated: true, completion: nil)
+    }
+    
+    @objc func saveMap(sender:UIBarButtonItem) {
+        print("save")
+    }
+    
+    @objc func showLayer(sender:UIBarButtonItem) {
+        print("save")
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {

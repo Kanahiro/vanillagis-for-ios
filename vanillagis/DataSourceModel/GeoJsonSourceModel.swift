@@ -63,7 +63,7 @@ struct GeoJsonSourceModel:DataSourceModel {
         guard let shapeFromGeoJSON = try? MGLShape(data: jsonData, encoding: String.Encoding.utf8.rawValue) else {
             fatalError("Could not generate MGLShape")
         }
-        let source = MGLShapeSource(identifier: self.type!, shape: shapeFromGeoJSON, options: nil)
+        let source = MGLShapeSource(identifier: self.filepath.lastPathComponent, shape: shapeFromGeoJSON, options: nil)
         return source
     }
     
@@ -74,13 +74,13 @@ struct GeoJsonSourceModel:DataSourceModel {
         //Geojson type will have classfied as one of three layer types in self.getType().
         switch self.type {
         case "polyline":
-            let layer = MGLLineStyleLayer(identifier: self.type!, source: source)
+            let layer = MGLLineStyleLayer(identifier: self.filepath.lastPathComponent, source: source)
             layer.lineColor = self.randomColor()
             layer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", [14: 2, 18: 20])
             return layer
             
         case "polygon":
-            let layer = MGLFillStyleLayer(identifier: self.type!, source: source)
+            let layer = MGLFillStyleLayer(identifier: self.filepath.lastPathComponent, source: source)
             let color:NSExpression = self.randomColor()
             layer.fillOutlineColor = color
             layer.fillColor = color
@@ -88,7 +88,7 @@ struct GeoJsonSourceModel:DataSourceModel {
             return layer
             
         default:
-            let layer = MGLCircleStyleLayer(identifier: self.type!, source: source)
+            let layer = MGLCircleStyleLayer(identifier: self.filepath.lastPathComponent, source: source)
             layer.circleColor = self.randomColor()
             layer.circleRadius = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'exponential', 1.75, %@)",
                                               [12: 20,

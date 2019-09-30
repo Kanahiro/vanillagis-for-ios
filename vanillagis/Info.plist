@@ -11,12 +11,16 @@
 			<array/>
 			<key>CFBundleTypeName</key>
 			<string>GeoJSON files</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.geojson</string>
-				<string>public.json</string>
 			</array>
 		</dict>
+		<dict/>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -38,6 +42,8 @@
 	<true/>
 	<key>MGLMapboxAccessToken_OLD</key>
 	<string>pk.eyJ1Ijoia2FuYWhpcm8iLCJhIjoiY2pwMnV4bDRjMGFkajNrbGtva3ZvYXdrZyJ9._4HC0CsOmu2gHVKtjxcURA</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Show your location on the map.</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -50,14 +56,34 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Show your location on the map.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>GeoJson file</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>public.geojson</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>geojson</string>
+				</array>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>

@@ -11,31 +11,37 @@ import Mapbox
 
 struct MapModel {
     var name: String
-    var style: [String:Any]
+    var style: [String:Any] = [:]
     var sources: [MGLShapeSource] = []
     var layers: [MGLStyleLayer] = []
     
-    init(name:String, style:[String:Any] = [:]) {
+    init(name:String) {
         self.name = name
-        //if STYLE in argument is empty, set default style
-        if style.count == 0 {
-            var mapStyleManager = MapStyleManager()
-            mapStyleManager.apllyDefault()
-            self.style = mapStyleManager.getStyle()
-        } else {
-            self.style = style
-        }
+        var mapStyleManager = MapStyleManager()
+        mapStyleManager.apllyDefault()
+        self.style = mapStyleManager.getStyle()
     }
     
-    mutating func appendSource(source:MGLShapeSource) {
+    init(name:String, sources:[MGLShapeSource], layers:[MGLStyleLayer]) {
+        self.name = name
+        self.sources = sources
+        self.layers = layers
+    }
+    
+    mutating func append(source:MGLShapeSource, layer:MGLStyleLayer) {
+        self.appendSource(source: source)
+        self.appendLayer(layer: layer)
+    }
+    
+    private mutating func appendSource(source:MGLShapeSource) {
         self.sources.append(source)
     }
     
-    mutating func appendLayer(layer:MGLStyleLayer) {
+    private mutating func appendLayer(layer:MGLStyleLayer) {
         self.layers.append(layer)
     }
     
-    func draw(mapView:MGLMapView) {
+    mutating func drawAll(mapView:MGLMapView) {
         guard let style = mapView.style else { return }
         for source in self.sources {
             style.addSource(source)
@@ -43,6 +49,18 @@ struct MapModel {
         for layer in self.layers {
             style.addLayer(layer)
         }
+    }
+    
+    mutating func draw(mapView:MGLMapView, source:MGLShapeSource, layer:MGLStyleLayer) {
+        guard let style = mapView.style else { return }
+        
+        //もし既に読み込まれているレイヤーならば、警告を出し何も処理しない
+        if (style.source(withIdentifier: source.identifier) != nil) { return }
+        if (style.layer(withIdentifier: layer.identifier) != nil) { return }
+        
+        self.append(source: source, layer: layer)
+        style.addSource(source)
+        style.addLayer(layer)
     }
     
     func export() -> [String:Any] {

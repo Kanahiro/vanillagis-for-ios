@@ -58,9 +58,7 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
         let source = gjSourceModel.makeSource()
         let layer = gjSourceModel.makeLayer()
         //set source and layer directly to the instance of previous ViewController
-        self.senderViewController.mapModel.appendSource(source: source)
-        self.senderViewController.mapModel.appendLayer(layer: layer)
-        
+        self.senderViewController.mapModel.draw(mapView:self.senderViewController.mapView, source: source, layer: layer)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -70,16 +68,16 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
         myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 40.0))
         myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-20.0)
         myToolbar.barStyle = UIBarStyle.blackTranslucent
-        myToolbar.tintColor = UIColor.white
-        myToolbar.backgroundColor = UIColor.black
-        let barCancelButton: UIBarButtonItem = UIBarButtonItem(title: "Cancel", style:.bordered, target: self, action: #selector(self.cancelButtonCilick(sender:)))
+        myToolbar.tintColor = UIColor.cyan
+        myToolbar.backgroundColor = UIColor.white
+        let barCancelButton: UIBarButtonItem = UIBarButtonItem(title: "Close", style:.bordered, target: self, action: #selector(self.closeButtonCilick(sender:)))
         barCancelButton.tag = 1
         myToolbar.items = [barCancelButton]
         
         self.view.addSubview(myToolbar)
     }
     
-    @objc func cancelButtonCilick(sender:UIBarButtonItem) {
+    @objc func closeButtonCilick(sender:UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
 }

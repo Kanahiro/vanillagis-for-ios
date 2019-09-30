@@ -12,11 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var navigationController: UINavigationController?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = FirstViewController()
-        window?.makeKeyAndVisible()
+        let first = FirstViewController()
+        navigationController = UINavigationController(rootViewController: first)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
         
         return true
     }
@@ -24,15 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         let jsonUrl = url
-        
 
         let geojson = GeoJsonSourceModel(filepath:jsonUrl)
         let source = geojson.makeSource()
         let layer = geojson.makeLayer()
         
         var newMapModel = MapModel(name: "New Map")
-        newMapModel.appendSource(source: source)
-        newMapModel.appendLayer(layer: layer)
+        newMapModel.append(source: source, layer: layer)
 
         
         let mapVc = MapViewController()
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController?.present(mapVc, animated: true, completion: nil)
         
+        print(mapVc.mapModel)
         return true
     }
 

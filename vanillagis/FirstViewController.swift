@@ -9,29 +9,36 @@
 import Foundation
 import UIKit
 
-class FirstViewController: UIViewController {
-    
+class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Vanilla GIS"
+        
         self.createDocumentDir()
         self.initNewButton()
+        self.initTableView()
     }
     
     func initNewButton() {
-        let newButton:UIButton = UIButton(frame: CGRect(x: 0, y: 50, width: self.view.frame.width, height: self.view.frame.height / 5))
-        newButton.backgroundColor = .white
-        newButton.setTitle("New Map", for: .normal)
-        newButton.setTitleColor(.black, for: .normal)
-        newButton.addTarget(self, action: #selector(pushNewButton), for: .touchUpInside)
-        
-        self.view.addSubview(newButton)
+        let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.pushNewButton(sender:)))
+        self.navigationItem.rightBarButtonItem = addBtn
+    }
+    
+    func initTableView() {
+        self.tableView = UITableView(frame: self.view.bounds, style: .plain)
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
     }
     
     @objc func pushNewButton(sender: UIButton){
         let mapVc = MapViewController()
         let newMapModel = MapModel(name: "New Map")
         mapVc.mapModel = newMapModel
-        present(mapVc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(mapVc, animated: true)
     }
     
     //ファイルアプリにvanillagisフォルダを作成する
@@ -62,5 +69,18 @@ class FirstViewController: UIViewController {
          
          fm.createFile(atPath: filePath, contents: fileData, attributes: [:])
          */
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+        cell.textLabel?.text = "a"
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 }
