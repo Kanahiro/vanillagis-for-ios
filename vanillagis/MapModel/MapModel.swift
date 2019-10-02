@@ -29,16 +29,14 @@ struct MapModel {
     }
     
     mutating func append(source:MGLShapeSource, layer:MGLStyleLayer) {
-        self.appendSource(source: source)
-        self.appendLayer(layer: layer)
-    }
-    
-    private mutating func appendSource(source:MGLShapeSource) {
         self.sources.append(source)
+        self.layers.append(layer)
     }
     
-    private mutating func appendLayer(layer:MGLStyleLayer) {
-        self.layers.append(layer)
+    mutating func remove(index:Int) {
+        if (self.sources.count < 1) { return }
+        self.sources.remove(at: index)
+        self.layers.remove(at: index)
     }
     
     mutating func drawAll(mapView:MGLMapView) {
@@ -51,16 +49,18 @@ struct MapModel {
         }
     }
     
-    mutating func draw(mapView:MGLMapView, source:MGLShapeSource, layer:MGLStyleLayer) {
-        guard let style = mapView.style else { return }
+    mutating func draw(mapView:MGLMapView, source:MGLShapeSource, layer:MGLStyleLayer) -> Bool {
+        guard let style = mapView.style else { return true }
         
         //もし既に読み込まれているレイヤーならば、警告を出し何も処理しない
-        if (style.source(withIdentifier: source.identifier) != nil) { return }
-        if (style.layer(withIdentifier: layer.identifier) != nil) { return }
+        if (style.source(withIdentifier: source.identifier) != nil) { return true }
+        if (style.layer(withIdentifier: layer.identifier) != nil) { return true }
         
         self.append(source: source, layer: layer)
         style.addSource(source)
         style.addLayer(layer)
+        
+        return false
     }
     
     func export() -> [String:Any] {

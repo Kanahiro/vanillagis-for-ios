@@ -49,16 +49,20 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //選択されたgeojsonファイルのデータを、遷移元のビューコントローラのインスタンスに渡す
-        guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: self.directory) else {
-            return
+        DispatchQueue.global(qos: .userInitiated).async {
+            //選択されたgeojsonファイルのデータを、遷移元のビューコントローラのインスタンスに渡す
+            guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: self.directory) else {
+                return
+            }
+            let filepath = URL(fileURLWithPath: self.directory + "/" + fileNames[indexPath.row])
+            let gjSourceModel = GeoJsonSourceModel(filepath: filepath)
+            let source = gjSourceModel.makeSource()
+            let layer = gjSourceModel.makeLayer()
+            //set source and layer directly to the instance of previous ViewController
+            if (self.senderViewController.mapModel.draw(mapView:self.senderViewController.mapView, source: source, layer: layer)) {
+                print("error")
+            }
         }
-        let filepath = URL(fileURLWithPath: self.directory + "/" + fileNames[indexPath.row])
-        let gjSourceModel = GeoJsonSourceModel(filepath: filepath)
-        let source = gjSourceModel.makeSource()
-        let layer = gjSourceModel.makeLayer()
-        //set source and layer directly to the instance of previous ViewController
-        self.senderViewController.mapModel.draw(mapView:self.senderViewController.mapView, source: source, layer: layer)
         self.dismiss(animated: true, completion: nil)
     }
     

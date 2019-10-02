@@ -43,6 +43,9 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.setCenter(CLLocationCoordinate2D(latitude: 44.2, longitude: 142.4), zoomLevel: 9, animated: false)
         
+        mapView.maximumZoomLevel = 18
+        mapView.minimumZoomLevel = 0
+        
         mapView.delegate = self
         
         self.view.addSubview(mapView)
@@ -59,7 +62,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 44.0))
         myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-20.0)
         myToolbar.barStyle = UIBarStyle.default
-        myToolbar.tintColor = UIColor.cyan
+        //myToolbar.tintColor = UIColor.default
         myToolbar.backgroundColor = UIColor.white
         
         let addIcon = UIImage(named: "icon_add.png")
@@ -75,10 +78,12 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         layerButton.tag = 3
         
         let locateIcon = UIImage(named: "icon_locate.png")
-        let locateButton: UIBarButtonItem = UIBarButtonItem(image: locateIcon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.showLayer(sender:)))
+        let locateButton: UIBarButtonItem = UIBarButtonItem(image: locateIcon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.showLocate(sender:)))
         layerButton.tag = 4
         
-        myToolbar.items = [addButton, saveButton, layerButton, locateButton]
+        let spacer = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+        
+        myToolbar.items = [addButton, spacer, saveButton, spacer, layerButton, spacer, locateButton]
         
         self.view.addSubview(myToolbar)
     }
@@ -96,6 +101,10 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     }
     
     @objc func showLayer(sender:UIBarButtonItem) {
+        print("save")
+    }
+    
+    @objc func showLocate(sender:UIBarButtonItem) {
         print("save")
     }
     
