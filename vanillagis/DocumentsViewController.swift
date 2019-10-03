@@ -68,13 +68,10 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
     
     func initToolbar() {
         var myToolbar: UIToolbar!
-        self.view.backgroundColor = UIColor.cyan
         myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 40.0))
         myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-20.0)
-        myToolbar.barStyle = UIBarStyle.blackTranslucent
-        myToolbar.tintColor = UIColor.cyan
-        myToolbar.backgroundColor = UIColor.white
-        let barCancelButton: UIBarButtonItem = UIBarButtonItem(title: "Close", style:.bordered, target: self, action: #selector(self.closeButtonCilick(sender:)))
+        myToolbar.isTranslucent = false
+        let barCancelButton: UIBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.closeButtonCilick(sender:)))
         barCancelButton.tag = 1
         myToolbar.items = [barCancelButton]
         

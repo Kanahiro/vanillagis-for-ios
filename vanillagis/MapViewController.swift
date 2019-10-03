@@ -23,8 +23,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(self.mapView.style?.layers)
-        //self.mapModel.draw(mapView: self.mapView)
     }
 
     func initMapView() {
@@ -58,13 +56,9 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     func initToolbar() {
         var myToolbar: UIToolbar!
-        self.view.backgroundColor = UIColor.white
         myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 44.0))
         myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-20.0)
-        myToolbar.barStyle = UIBarStyle.default
-        //myToolbar.tintColor = UIColor.default
-        myToolbar.backgroundColor = UIColor.white
-        
+        myToolbar.isTranslucent = false
         let addIcon = UIImage(named: "icon_add.png")
         let addButton: UIBarButtonItem = UIBarButtonItem(image : addIcon, style: UIBarButtonItem.Style.plain ,target: self, action: #selector(self.addDocument(sender:)))
         addButton.tag = 1
@@ -93,7 +87,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         let docVc = DocumentsViewController()
         docVc.directory = NSHomeDirectory() + "/Documents" + "/geojsons"
         docVc.senderViewController = self
-        self.present(docVc, animated: true, completion: nil)
+        present(docVc, animated: true, completion: nil)
     }
     
     @objc func saveMap(sender:UIBarButtonItem) {
@@ -101,11 +95,18 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     }
     
     @objc func showLayer(sender:UIBarButtonItem) {
-        print("save")
+        let layerVc = LayerViewController()
+        
+        layerVc.layers = self.mapView.style?.layers
+        present(layerVc, animated: true, completion: nil)
     }
     
     @objc func showLocate(sender:UIBarButtonItem) {
-        print("save")
+        if (self.mapView.userTrackingMode != .follow) {
+            self.mapView.userTrackingMode = .follow
+        } else {
+            self.mapView.userTrackingMode = .followWithHeading
+        }
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {

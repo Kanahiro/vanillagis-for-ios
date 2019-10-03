@@ -91,8 +91,8 @@ struct GeoJsonSourceModel:DataSourceModel {
             let layer = MGLCircleStyleLayer(identifier: self.filepath.lastPathComponent, source: source)
             layer.circleColor = self.randomColor()
             layer.circleRadius = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'exponential', 1.75, %@)",
-                                              [12: 20,
-                                               22: 300])
+                                              [12: 5,
+                                               18: 25])
             return layer
         }
     }
