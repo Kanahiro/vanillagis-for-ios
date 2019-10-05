@@ -16,8 +16,27 @@ class LayerViewController:UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.initHeaderToolbar()
         self.initTableView()
+        self.initToolbar()
+    }
+    
+    func initTableView() {
+        self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height - 44), style: .plain)
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.rowHeight = 60
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        //custom cell
+        let nib = UINib(nibName: "LayerViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "layerViewCell")
+        
+        //並び替え
+        tableView.isEditing = true
+        tableView.allowsSelectionDuringEditing = true
+        
+        self.view.addSubview(tableView)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -25,14 +44,11 @@ class LayerViewController:UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "layerViewCell") as! LayerViewCell
         let layer = layers[layers.count - 1 - indexPath.row]
-        cell.textLabel?.text = layer.identifier
-        if (layer.isVisible) {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
+        cell.layerNameLabel?.text = layer.identifier
+        //cell.detailTextLabel?.text = String(describing: type(of: layer))
+        cell.layerSwitch.isOn = layer.isVisible
         return cell
     }
     
@@ -42,7 +58,26 @@ class LayerViewController:UIViewController, UITableViewDelegate, UITableViewData
         tableView.reloadData()
     }
     
-    func initHeaderToolbar() {
+    //並び替え
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //並び替え処理
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+
+    }
+    
+    //追加と削除ボタン
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func initToolbar() {
         var myToolbar: UIToolbar!
         myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 44.0))
         myToolbar.isTranslucent = false
@@ -52,14 +87,6 @@ class LayerViewController:UIViewController, UITableViewDelegate, UITableViewData
         myToolbar.items = [barCancelButton]
         
         self.view.addSubview(myToolbar)
-    }
-    
-    func initTableView() {
-        self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height - 44), style: .plain)
-        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.view.addSubview(tableView)
     }
     
     @objc func closeButtonCilick(sender:UIBarButtonItem) {

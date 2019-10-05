@@ -49,6 +49,13 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         self.view.addSubview(mapView)
     }
     
+    func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
+    }
+    
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+        self.initUserLocation()
+    }
+    
     func initUserLocation() {
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .none
@@ -77,7 +84,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         
         let spacer = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
         
-        myToolbar.items = [addButton, spacer, saveButton, spacer, layerButton, spacer, locateButton]
+        myToolbar.items = [addButton, spacer, layerButton, spacer, locateButton, spacer, saveButton]
         
         self.view.addSubview(myToolbar)
     }
@@ -96,7 +103,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     @objc func showLayer(sender:UIBarButtonItem) {
         let layerVc = LayerViewController()
-        
         layerVc.layers = self.mapView.style?.layers
         present(layerVc, animated: true, completion: nil)
     }
@@ -107,13 +113,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         } else {
             self.mapView.userTrackingMode = .followWithHeading
         }
-    }
-    
-    func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
-    }
-    
-    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        self.initUserLocation()
     }
     
 }

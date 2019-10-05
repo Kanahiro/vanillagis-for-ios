@@ -16,7 +16,7 @@ struct MapStyleManager {
     ]
     
     mutating func apllyDefault() {
-        let defaultName = "国土地理院"
+        let defaultName = "国土地理院オルソ"
         let defaultTileUrl = "https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"
         let defaultAttributionUrl = "https://maps.gsi.go.jp/development/ichiran.html"
         self.setBasemap(name: defaultName, tileUrlStr: defaultTileUrl, attributionUrl:defaultAttributionUrl)

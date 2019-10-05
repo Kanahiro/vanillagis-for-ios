@@ -26,6 +26,8 @@
 		93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350170232BBEC9006CFCCA /* MapStyleManager.swift */; };
 		93350173232E5876006CFCCA /* ShapefileSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350172232E5876006CFCCA /* ShapefileSourceModel.swift */; };
 		93680CB52346027C00E928B8 /* LayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93680CB42346027C00E928B8 /* LayerViewController.swift */; };
+		93680CBE234881F400E928B8 /* LayerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93680CBC234881F400E928B8 /* LayerViewCell.swift */; };
+		93680CBF234881F400E928B8 /* LayerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93680CBD234881F400E928B8 /* LayerViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		93350172232E5876006CFCCA /* ShapefileSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapefileSourceModel.swift; sourceTree = "<group>"; };
 		93350174232E63E1006CFCCA /* test.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.geojson; sourceTree = "<group>"; };
 		93680CB42346027C00E928B8 /* LayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerViewController.swift; sourceTree = "<group>"; };
+		93680CBC234881F400E928B8 /* LayerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerViewCell.swift; sourceTree = "<group>"; };
+		93680CBD234881F400E928B8 /* LayerViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LayerViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 				9301CF2D231D37CF007B8FBD /* MapViewController.swift */,
 				93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */,
 				93680CB42346027C00E928B8 /* LayerViewController.swift */,
+				93680CBC234881F400E928B8 /* LayerViewCell.swift */,
+				93680CBD234881F400E928B8 /* LayerViewCell.xib */,
 				9335016F232BBEAF006CFCCA /* Utils */,
 				93350165232A36CE006CFCCA /* DataSourceModel */,
 				93350168232A450C006CFCCA /* MapModel */,
@@ -313,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93680CBF234881F400E928B8 /* LayerViewCell.xib in Resources */,
 				93182A6F232E7201000DC0C1 /* test.geojson in Resources */,
 				9301CF36231D37D1007B8FBD /* LaunchScreen.storyboard in Resources */,
 				9301CF33231D37D1007B8FBD /* Assets.xcassets in Resources */,
@@ -390,6 +397,7 @@
 				9335016E232B7D31006CFCCA /* MapModel.swift in Sources */,
 				93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */,
 				9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */,
+				93680CBE234881F400E928B8 /* LayerViewCell.swift in Sources */,
 				93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */,
 				93182A71232F5AFC000DC0C1 /* DocumentsViewController.swift in Sources */,
 				9301CF2E231D37CF007B8FBD /* MapViewController.swift in Sources */,

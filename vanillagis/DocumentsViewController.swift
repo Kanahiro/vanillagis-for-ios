@@ -25,7 +25,7 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     func initTableView() {
-        self.tableView = UITableView(frame: self.view.bounds, style: .plain)
+        self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height - 44), style: .plain)
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.delegate = self
         tableView.dataSource = self
@@ -68,8 +68,7 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
     
     func initToolbar() {
         var myToolbar: UIToolbar!
-        myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 40.0))
-        myToolbar.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height-20.0)
+        myToolbar = UIToolbar(frame: CGRect(x: 0, y: self.view.bounds.size.height - 44, width: self.view.bounds.size.width, height: 44.0))
         myToolbar.isTranslucent = false
         let barCancelButton: UIBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.closeButtonCilick(sender:)))
         barCancelButton.tag = 1
