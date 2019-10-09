@@ -28,6 +28,8 @@
 		93680CB52346027C00E928B8 /* LayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93680CB42346027C00E928B8 /* LayerViewController.swift */; };
 		93680CBE234881F400E928B8 /* LayerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93680CBC234881F400E928B8 /* LayerViewCell.swift */; };
 		93680CBF234881F400E928B8 /* LayerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93680CBD234881F400E928B8 /* LayerViewCell.xib */; };
+		93D791E6234A1C1300E78980 /* LayerEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D791E4234A1C1300E78980 /* LayerEditViewController.swift */; };
+		93D79229234B657800E78980 /* LayerEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D79228234B657800E78980 /* LayerEditViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		93680CB42346027C00E928B8 /* LayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerViewController.swift; sourceTree = "<group>"; };
 		93680CBC234881F400E928B8 /* LayerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerViewCell.swift; sourceTree = "<group>"; };
 		93680CBD234881F400E928B8 /* LayerViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LayerViewCell.xib; sourceTree = "<group>"; };
+		93D791E4234A1C1300E78980 /* LayerEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerEditViewController.swift; sourceTree = "<group>"; };
+		93D79228234B657800E78980 /* LayerEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LayerEditViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,9 +148,7 @@
 				9335016B232B240D006CFCCA /* FirstViewController.swift */,
 				9301CF2D231D37CF007B8FBD /* MapViewController.swift */,
 				93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */,
-				93680CB42346027C00E928B8 /* LayerViewController.swift */,
-				93680CBC234881F400E928B8 /* LayerViewCell.swift */,
-				93680CBD234881F400E928B8 /* LayerViewCell.xib */,
+				93680CC22348AF3600E928B8 /* LayerView */,
 				9335016F232BBEAF006CFCCA /* Utils */,
 				93350165232A36CE006CFCCA /* DataSourceModel */,
 				93350168232A450C006CFCCA /* MapModel */,
@@ -202,6 +204,18 @@
 				93350170232BBEC9006CFCCA /* MapStyleManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		93680CC22348AF3600E928B8 /* LayerView */ = {
+			isa = PBXGroup;
+			children = (
+				93680CB42346027C00E928B8 /* LayerViewController.swift */,
+				93680CBC234881F400E928B8 /* LayerViewCell.swift */,
+				93680CBD234881F400E928B8 /* LayerViewCell.xib */,
+				93D79228234B657800E78980 /* LayerEditViewController.storyboard */,
+				93D791E4234A1C1300E78980 /* LayerEditViewController.swift */,
+			);
+			path = LayerView;
 			sourceTree = "<group>";
 		};
 		FCA04DEA1E706714F4867CF6 /* Pods */ = {
@@ -324,6 +338,7 @@
 				9301CF36231D37D1007B8FBD /* LaunchScreen.storyboard in Resources */,
 				9301CF33231D37D1007B8FBD /* Assets.xcassets in Resources */,
 				9306722C231EAA52004F1CCA /* sample.geojson in Resources */,
+				93D79229234B657800E78980 /* LayerEditViewController.storyboard in Resources */,
 				9306722A231E9CC0004F1CCA /* default.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +412,7 @@
 				9335016E232B7D31006CFCCA /* MapModel.swift in Sources */,
 				93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */,
 				9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */,
+				93D791E6234A1C1300E78980 /* LayerEditViewController.swift in Sources */,
 				93680CBE234881F400E928B8 /* LayerViewCell.swift in Sources */,
 				93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */,
 				93182A71232F5AFC000DC0C1 /* DocumentsViewController.swift in Sources */,

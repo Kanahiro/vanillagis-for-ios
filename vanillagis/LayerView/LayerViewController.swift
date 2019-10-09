@@ -10,7 +10,7 @@ import UIKit
 import Mapbox
 
 class LayerViewController:UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var layers: [MGLStyleLayer]!
+    var mapView: MGLMapView!
     var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -40,32 +40,59 @@ class LayerViewController:UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return layers.count
+        return mapView.style!.layers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "layerViewCell") as! LayerViewCell
-        let layer = layers[layers.count - 1 - indexPath.row]
+        let layer = mapView.style!.layers[indexPath.row]
+        
+        //init props
+        cell.mapView = self.mapView
+        cell.selectedLayer = layer
+        cell.senderViewController = self
+        
         cell.layerNameLabel?.text = layer.identifier
-        //cell.detailTextLabel?.text = String(describing: type(of: layer))
+        cell.layerTypeLabel?.text = self.layerType(layer: layer)
         cell.layerSwitch.isOn = layer.isVisible
+        
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let layer = mapView.style!.layers[indexPath.row]
+        if (self.layerType(layer: layer) == "MGLSymbolStyleLayer" ) {
+            return 0
+        }
+        return tableView.rowHeight
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let layer = layers[layers.count - 1 - indexPath.row]
+        let layer = mapView.style!.layers[indexPath.row]
         layer.isVisible = !layer.isVisible
         tableView.reloadData()
     }
     
     //並び替え
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        let layer = mapView.style!.layers[indexPath.row]
+        if (self.layerType(layer: layer) == "MGLSymbolStyleLayer" ) {
+            return false
+        }
         return true
     }
     
     //並び替え処理
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
+        let selectedLayer = mapView.style!.layers[sourceIndexPath.row]
+        mapView.style!.removeLayer(selectedLayer)
+        //末尾に挿入する場合addLayer
+        if (mapView.style!.layers.count == destinationIndexPath.row) {
+            mapView.style!.addLayer(selectedLayer)
+        } else {
+            mapView.style!.insertLayer(selectedLayer, at: UInt(destinationIndexPath.row))
+        }
+        tableView.reloadData()
     }
     
     //追加と削除ボタン
@@ -75,6 +102,23 @@ class LayerViewController:UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
+    }
+    
+    func layerType(layer:MGLStyleLayer) -> String {
+        let layerClass = String(describing: type(of: layer))
+        switch layerClass {
+        case "MGLRasterStyleLayer":
+            return "Raster"
+        case "MGLCircleStyleLayer", "MGLHeatmapStyleLayer":
+            return "Point"
+        case "MGLLineStyleLayer":
+            return "Polyline"
+        case "MGLFillStyleLayer":
+            return "Polygon"
+        default:
+            return layerClass
+            
+        }
     }
     
     func initToolbar() {

@@ -44,9 +44,39 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         mapView.maximumZoomLevel = 18
         mapView.minimumZoomLevel = 0
         
+        mapView.backgroundColor = .white
+        
         mapView.delegate = self
         
         self.view.addSubview(mapView)
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(sender:)))
+        for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
+            singleTap.require(toFail: recognizer)
+        }
+        mapView.addGestureRecognizer(singleTap)
+    }
+    
+    @objc @IBAction func mapViewTapped(sender: UITapGestureRecognizer) {
+        //init annotations
+        let annotations = mapView.annotations
+        if annotations != nil {
+            for annotation in annotations! {
+                mapView.removeAnnotation(annotation)
+            }
+        }
+        
+        // Get the CGPoint where the user tapped.
+        let spot = sender.location(in: mapView)
+         
+        // Access the features at that point within the state layer.
+        let features = mapView.visibleFeatures(at: spot)
+        print(features)
+        
+    }
+     
+    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        return true
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
@@ -103,7 +133,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     @objc func showLayer(sender:UIBarButtonItem) {
         let layerVc = LayerViewController()
-        layerVc.layers = self.mapView.style?.layers
+        layerVc.mapView = self.mapView
         present(layerVc, animated: true, completion: nil)
     }
     

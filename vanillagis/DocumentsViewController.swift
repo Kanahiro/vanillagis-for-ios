@@ -49,7 +49,7 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             //選択されたgeojsonファイルのデータを、遷移元のビューコントローラのインスタンスに渡す
             guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: self.directory) else {
                 return
