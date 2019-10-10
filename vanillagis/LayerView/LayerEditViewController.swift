@@ -8,6 +8,7 @@
 
 import UIKit
 import Mapbox
+import ColorSlider
 
 class LayerEditViewController: UITableViewController {
     
@@ -16,6 +17,8 @@ class LayerEditViewController: UITableViewController {
     @IBOutlet weak var rasterOpacity: UISlider!
     
     //polygon
+    @IBOutlet weak var polygonColorSliderView: UIView!
+    private var polygonColor: UIColor!
     @IBOutlet weak var fillOpacity: UISlider!
     
     //polyline
@@ -52,6 +55,8 @@ class LayerEditViewController: UITableViewController {
         case "MGLFillStyleLayer":
             let polygonLayer = self.layer! as! MGLFillStyleLayer
             fillOpacity.value = polygonLayer.fillOpacity.expressionValue(with: nil, context: nil) as! Float
+            polygonColor = polygonLayer.fillColor.expressionValue(with: nil, context: nil) as? UIColor
+            initColorSlider(container: polygonColorSliderView)
         case "MGLLineStyleLayer":
             let polylineLayer = self.layer! as! MGLLineStyleLayer
             lineOpacity.value = polylineLayer.lineOpacity.expressionValue(with: nil, context: nil) as! Float
@@ -76,6 +81,7 @@ class LayerEditViewController: UITableViewController {
         case "MGLFillStyleLayer":
             let polygonLayer = self.layer! as! MGLFillStyleLayer
             polygonLayer.fillOpacity = NSExpression(forConstantValue: fillOpacity.value)
+            polygonLayer.fillColor = NSExpression(forConstantValue: polygonColor)
         case "MGLLineStyleLayer":
             let polylineLayer = self.layer! as! MGLLineStyleLayer
             polylineLayer.lineOpacity = NSExpression(forConstantValue: lineOpacity.value)
@@ -105,6 +111,28 @@ class LayerEditViewController: UITableViewController {
             return
         }
         
+    }
+    //color silider
+    func initColorSlider(container:UIView) {
+        let previewView = DefaultPreviewView()
+        previewView.side = .top
+        previewView.animationDuration = 0.2
+        previewView.offsetAmount = 0
+        
+        let colorSlider = ColorSlider(orientation: .horizontal, previewView: previewView)
+        colorSlider.frame = self.polygonColorSliderView.bounds
+        colorSlider.color = self.polygonColor
+        colorSlider.addTarget(self, action: #selector(changePolygonColor(sender:)), for: .valueChanged)
+        container.addSubview(colorSlider)
+    }
+    
+    @objc func changePolygonColor(sender:ColorSlider) {
+        switch self.layerClass() {
+        case "MGLFillStyleLayer":
+            self.polygonColor = sender.color
+        default:
+            return
+        }
     }
     
     func layerClass() -> String {
@@ -178,6 +206,7 @@ class LayerEditViewController: UITableViewController {
         return 0
     }
     
+    /*
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.row != 0) { return }
         var alertTextField: UITextField?
@@ -208,7 +237,7 @@ class LayerEditViewController: UITableViewController {
 
         self.present(alert, animated: true, completion: nil)
     }
-
+    */
     
     /*
     // MARK: - Navigation

@@ -109,6 +109,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gk6-hX-eQT">
+                                                    <rect key="frame" x="179" y="16" width="180" height="10"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                    <connections>
+                                                        <segue destination="YIz-2i-Qff" kind="embed" id="Xqh-gm-ryE"/>
+                                                    </connections>
+                                                </containerView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -151,6 +158,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0DV-5R-QiS">
+                                                    <rect key="frame" x="178" y="16" width="181" height="10"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                </containerView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -193,6 +204,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ua-hu-PTV">
+                                                    <rect key="frame" x="178" y="16" width="181" height="10"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                </containerView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -251,6 +266,7 @@
                         <outlet property="heatmapSwitch" destination="vp7-Hh-7Eq" id="1Ia-2t-8iI"/>
                         <outlet property="lineOpacity" destination="NaM-SZ-JxU" id="6cM-cD-ea6"/>
                         <outlet property="pointOpacity" destination="Jh4-w6-mRN" id="p6t-Y9-EKE"/>
+                        <outlet property="polygonColorSliderView" destination="gk6-hX-eQT" id="ANS-32-aa5"/>
                         <outlet property="rasterOpacity" destination="nRQ-v9-53X" id="idQ-Ol-QqY"/>
                         <outlet property="tileUrlLabel" destination="yf3-hV-ns8" id="yal-do-eZu"/>
                     </connections>
@@ -258,6 +274,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Tz-b1-u5R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-29.600000000000001" y="105.69715142428787"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="9CB-zG-KbY">
+            <objects>
+                <viewController id="YIz-2i-Qff" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i0z-2J-ggz">
+                        <rect key="frame" x="0.0" y="0.0" width="180" height="10"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="urF-la-Jve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-29" y="523"/>
         </scene>
     </scenes>
 </document>
