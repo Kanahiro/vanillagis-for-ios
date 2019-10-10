@@ -11,15 +11,11 @@ import Mapbox
 
 struct MapModel {
     var name: String
-    var style: [String:Any] = [:]
     var sources: [MGLShapeSource] = []
     var layers: [MGLStyleLayer] = []
     
     init(name:String) {
         self.name = name
-        var mapStyleManager = MapStyleManager()
-        mapStyleManager.apllyDefault()
-        self.style = mapStyleManager.getStyle()
     }
     
     init(name:String, sources:[MGLShapeSource], layers:[MGLStyleLayer]) {
@@ -66,7 +62,6 @@ struct MapModel {
     func export() -> [String:Any] {
         let exportDic:[String:Any] = [
             "name":self.name,
-            "style":self.style,
             "sources":self.sources,
             "layers":self.layers
         ]
