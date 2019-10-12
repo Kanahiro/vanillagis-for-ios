@@ -22,21 +22,40 @@ class LayerEditViewController: UITableViewController {
     @IBOutlet weak var fillOpacity: UISlider!
     
     //polyline
+    @IBOutlet weak var lineColorSliderView: UIView!
+    private var lineColor: UIColor!
     @IBOutlet weak var lineOpacity: UISlider!
     
     //point
+    @IBOutlet weak var pointColorSliderView: UIView!
+    private var pointColor: UIColor!
     @IBOutlet weak var pointOpacity: UISlider!
     @IBOutlet weak var heatmapSwitch: UISwitch!
     
-    
-    
-    @IBAction func closeButtonPushed(_ sender: UIBarButtonItem) {
+    //general
+    @IBAction func deleteButtonPushed(_ sender: UIButton) {
+        self.showDeletionAlert()
+    }
+    @IBAction func closeButtonPushed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
+    //the properties will have been initialized before instantiate
+    //layer is classfied as Point, Polyline, Polygon
+    //Point: MGLCircleStyleLayer, MGLHeatmapLayer
+    //Polyline: MGLLineStyleLayer
+    //Polygon: MGLFillStyleLayer
+    //you can get the class of layer by self.layerClass()
     var mapView: MGLMapView!
     var layer: MGLStyleLayer!
+    
+    func layerClass() -> String {
+        return String(describing: type(of: self.layer!))
+    }
+    
+    func layerClass(layer: MGLStyleLayer) -> String {
+        return String(describing: type(of: layer))
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +75,17 @@ class LayerEditViewController: UITableViewController {
             let polygonLayer = self.layer! as! MGLFillStyleLayer
             fillOpacity.value = polygonLayer.fillOpacity.expressionValue(with: nil, context: nil) as! Float
             polygonColor = polygonLayer.fillColor.expressionValue(with: nil, context: nil) as? UIColor
-            initColorSlider(container: polygonColorSliderView)
+            initColorSlider(container: polygonColorSliderView, color:polygonColor)
         case "MGLLineStyleLayer":
             let polylineLayer = self.layer! as! MGLLineStyleLayer
             lineOpacity.value = polylineLayer.lineOpacity.expressionValue(with: nil, context: nil) as! Float
+            lineColor = polylineLayer.lineColor.expressionValue(with: nil, context: nil) as? UIColor
+            initColorSlider(container: lineColorSliderView, color:lineColor)
         case "MGLCircleStyleLayer":
             let pointLayer = self.layer! as! MGLCircleStyleLayer
             pointOpacity.value = pointLayer.circleOpacity.expressionValue(with: nil, context: nil) as! Float
+            pointColor = pointLayer.circleColor.expressionValue(with: nil, context: nil) as? UIColor
+            initColorSlider(container: pointColorSliderView, color:pointColor)
             heatmapSwitch.isOn = false
         case "MGLHeatmapStyleLayer":
             let heatmapLayer = self.layer! as! MGLHeatmapStyleLayer
@@ -85,10 +108,12 @@ class LayerEditViewController: UITableViewController {
         case "MGLLineStyleLayer":
             let polylineLayer = self.layer! as! MGLLineStyleLayer
             polylineLayer.lineOpacity = NSExpression(forConstantValue: lineOpacity.value)
+            polylineLayer.lineColor = NSExpression(forConstantValue: lineColor)
         case "MGLCircleStyleLayer":
             let pointLayer = self.layer! as! MGLCircleStyleLayer
             //opacity
             pointLayer.circleOpacity = NSExpression(forConstantValue: pointOpacity.value)
+            pointLayer.circleColor = NSExpression(forConstantValue: pointColor)
             //heatmap mode
             if (heatmapSwitch.isOn) {
                 let heatmapLayer = MGLHeatmapStyleLayer(identifier: pointLayer.identifier, source: mapView.style!.source(withIdentifier:pointLayer.sourceIdentifier!)!)
@@ -103,6 +128,8 @@ class LayerEditViewController: UITableViewController {
             //heatmap mode
             if (!heatmapSwitch.isOn) {
                 let pointLayer = MGLCircleStyleLayer(identifier: heatmapLayer.identifier, source: mapView.style!.source(withIdentifier:heatmapLayer.sourceIdentifier!)!)
+                pointLayer.circleStrokeWidth = NSExpression(forConstantValue: 0.2)
+                pointLayer.circleStrokeColor = NSExpression(forConstantValue: UIColor(red: 1, green: 1, blue: 1, alpha: 1))
                 pointLayer.circleOpacity = NSExpression(forConstantValue: pointOpacity.value)
                 mapView.style!.removeLayer(heatmapLayer)
                 mapView.style!.addLayer(pointLayer)
@@ -110,18 +137,18 @@ class LayerEditViewController: UITableViewController {
         default:
             return
         }
-        
     }
-    //color silider
-    func initColorSlider(container:UIView) {
+    
+    func initColorSlider(container:UIView, color:UIColor) {
         let previewView = DefaultPreviewView()
         previewView.side = .top
         previewView.animationDuration = 0.2
         previewView.offsetAmount = 0
         
         let colorSlider = ColorSlider(orientation: .horizontal, previewView: previewView)
-        colorSlider.frame = self.polygonColorSliderView.bounds
-        colorSlider.color = self.polygonColor
+        colorSlider.frame = container.bounds
+        colorSlider.color = color
+        
         colorSlider.addTarget(self, action: #selector(changePolygonColor(sender:)), for: .valueChanged)
         container.addSubview(colorSlider)
     }
@@ -130,95 +157,77 @@ class LayerEditViewController: UITableViewController {
         switch self.layerClass() {
         case "MGLFillStyleLayer":
             self.polygonColor = sender.color
+        case "MGLLineStyleLayer":
+            self.lineColor = sender.color
+        case "MGLCircleStyleLayer":
+            self.pointColor = sender.color
         default:
             return
         }
     }
     
-    func layerClass() -> String {
-        return String(describing: type(of: self.layer!))
-    }
-    
-    func layerClass(layer: MGLStyleLayer) -> String {
-        return String(describing: type(of: layer))
-    }
-    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if ( section == 0 ) {
-            if (self.layerClass() == "MGLRasterStyleLayer" ) { return super.tableView(tableView, heightForHeaderInSection: section) }
+        switch self.layerClass() {
+        case "MGLRasterStyleLayer":
+            if ( section == 0 ) { return super.tableView(tableView, heightForHeaderInSection: section) }
+        case "MGLFillStyleLayer":
+            if ( section == 1 ) { return super.tableView(tableView, heightForHeaderInSection: section) }
+        case "MGLLineStyleLayer":
+            if ( section == 2 ) { return super.tableView(tableView, heightForHeaderInSection: section) }
+        case "MGLCircleStyleLayer", "MGLHeatmapStyleLayer":
+            if ( section == 3 ) { return super.tableView(tableView, heightForHeaderInSection: section) }
+        default:
+            break
         }
-        
-        if ( section == 1 ) {
-            if (self.layerClass() == "MGLFillStyleLayer" ) { return super.tableView(tableView, heightForHeaderInSection: section) }
-        }
-        
-        if ( section == 2 ) {
-            if (self.layerClass() == "MGLLineStyleLayer" ) { return super.tableView(tableView, heightForHeaderInSection: section) }
-        }
-        
-        if ( section == 3 ) {
-            if (self.layerClass() == "MGLCircleStyleLayer" ) { return super.tableView(tableView, heightForHeaderInSection: section) }
-            if (self.layerClass() == "MGLHeatmapStyleLayer" ) { return super.tableView(tableView, heightForHeaderInSection: section) }
-        }
+        //general
+        if (section == 4 ) { return super.tableView(tableView, heightForHeaderInSection: section) }
         
         return CGFloat.leastNonzeroMagnitude
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if ( section == 0 ) {
-            if (self.layerClass() == "MGLRasterStyleLayer" ) { return super.tableView(tableView, titleForHeaderInSection: section) }
+        switch self.layerClass() {
+        case "MGLRasterStyleLayer":
+            if ( section == 0 ) { return super.tableView(tableView, titleForHeaderInSection: section) }
+        case "MGLFillStyleLayer":
+            if ( section == 1 ) { return super.tableView(tableView, titleForHeaderInSection: section) }
+        case "MGLLineStyleLayer":
+            if ( section == 2 ) { return super.tableView(tableView, titleForHeaderInSection: section) }
+        case "MGLCircleStyleLayer", "MGLHeatmapStyleLayer":
+            if ( section == 3 ) { return super.tableView(tableView, titleForHeaderInSection: section) }
+        default:
+            break
         }
-        
-        if ( section == 1 ) {
-            if (self.layerClass() == "MGLFillStyleLayer" ) { return super.tableView(tableView, titleForHeaderInSection: section) }
-        }
-        
-        if ( section == 2 ) {
-            if (self.layerClass() == "MGLLineStyleLayer" ) { return super.tableView(tableView, titleForHeaderInSection: section) }
-        }
-        
-        if ( section == 3 ) {
-            if (self.layerClass() == "MGLCircleStyleLayer" ) { return super.tableView(tableView, titleForHeaderInSection: section) }
-            if (self.layerClass() == "MGLHeatmapStyleLayer" ) { return super.tableView(tableView, titleForHeaderInSection: section) }
-        }
+        //general
+        if (section == 4 ) { return super.tableView(tableView, titleForHeaderInSection: section) }
         
         return nil
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if ( section == 0 ) {
-            if (self.layerClass() == "MGLRasterStyleLayer" ) { return super.tableView(tableView, numberOfRowsInSection: section) }
+        switch self.layerClass() {
+        case "MGLRasterStyleLayer":
+            if ( section == 0 ) { return super.tableView(tableView, numberOfRowsInSection: section) }
+        case "MGLFillStyleLayer":
+            if ( section == 1 ) { return super.tableView(tableView, numberOfRowsInSection: section) }
+        case "MGLLineStyleLayer":
+            if ( section == 2 ) { return super.tableView(tableView, numberOfRowsInSection: section) }
+        case "MGLCircleStyleLayer", "MGLHeatmapStyleLayer":
+            if ( section == 3 ) { return super.tableView(tableView, numberOfRowsInSection: section) }
+        default:
+            break
         }
-        
-        if ( section == 1 ) {
-            if (self.layerClass() == "MGLFillStyleLayer" ) { return super.tableView(tableView, numberOfRowsInSection: section) }
-        }
-        
-        if ( section == 2 ) {
-            if (self.layerClass() == "MGLLineStyleLayer" ) { return super.tableView(tableView, numberOfRowsInSection: section) }
-        }
-        
-        if ( section == 3 ) {
-            if (self.layerClass() == "MGLCircleStyleLayer" ) { return super.tableView(tableView, numberOfRowsInSection: section) }
-            if (self.layerClass() == "MGLHeatmapStyleLayer" ) { return super.tableView(tableView, numberOfRowsInSection: section) }
-        }
+        //general
+        if (section == 4 ) { return super.tableView(tableView, numberOfRowsInSection: section) }
         
         return 0
     }
     
-    /*
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.row != 0) { return }
-        var alertTextField: UITextField?
-
+    private func showDeletionAlert() {
         let alert = UIAlertController(
-            title: "Raster",
-            message: "Enter XYZ tile URL",
+            title: "Caution",
+            message: "Confirm before deletion.",
             preferredStyle: UIAlertController.Style.alert)
-        alert.addTextField(
-            configurationHandler: {(textField: UITextField!) in
-                alertTextField = textField
-        })
         alert.addAction(
             UIAlertAction(
                 title: "Cancel",
@@ -228,17 +237,16 @@ class LayerEditViewController: UITableViewController {
             UIAlertAction(
                 title: "OK",
                 style: UIAlertAction.Style.default) { _ in
-                if let text = alertTextField?.text {
-                    self.tileUrlLabel.text = text
-                    //TODO URL VALIDATION
-                }
+                    self.mapView.style!.removeLayer(self.layer)
+                    let superVC = self.presentingViewController as! LayerViewController
+                    superVC.updateTableView()
+                    self.dismiss(animated: true, completion: nil)
             }
         )
 
         self.present(alert, animated: true, completion: nil)
     }
-    */
-    
+        
     /*
     // MARK: - Navigation
      

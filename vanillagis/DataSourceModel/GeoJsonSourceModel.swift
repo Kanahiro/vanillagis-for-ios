@@ -25,7 +25,7 @@ struct GeoJsonSourceModel:DataSourceModel {
         return jsonData
     }
     
-    func getType() -> String {
+    private func getType() -> String {
         let jsonData:Data = self.loadGeoJson()
         guard let jsonObj = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String:Any] else {
             preconditionFailure("Failed to parse JSON file")
@@ -82,13 +82,15 @@ struct GeoJsonSourceModel:DataSourceModel {
         case "polygon":
             let layer = MGLFillStyleLayer(identifier: self.filepath.lastPathComponent, source: source)
             let color:NSExpression = self.randomColor()
-            layer.fillOutlineColor = color
+            layer.fillOutlineColor = NSExpression(forConstantValue: UIColor(red: 1, green: 1, blue: 1, alpha: 1))
             layer.fillColor = color
             layer.fillOpacity = NSExpression(forConstantValue: 0.5)
             return layer
             
         default:
             let layer = MGLCircleStyleLayer(identifier: self.filepath.lastPathComponent, source: source)
+            layer.circleStrokeWidth = NSExpression(forConstantValue: 0.2)
+            layer.circleStrokeColor = NSExpression(forConstantValue: UIColor(red: 1, green: 1, blue: 1, alpha: 1))
             layer.circleColor = self.randomColor()
             layer.circleRadius = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'exponential', 1.75, %@)",
                                               [12: 5,

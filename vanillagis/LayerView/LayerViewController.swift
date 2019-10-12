@@ -104,6 +104,10 @@ class LayerViewController:UIViewController, UITableViewDelegate, UITableViewData
         return false
     }
     
+    func updateTableView() {
+        self.tableView.reloadData()
+    }
+    
     func layerType(layer:MGLStyleLayer) -> String {
         let layerClass = String(describing: type(of: layer))
         switch layerClass {
