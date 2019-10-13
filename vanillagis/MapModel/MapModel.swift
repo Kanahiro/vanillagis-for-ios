@@ -10,58 +10,49 @@ import Foundation
 import Mapbox
 
 struct MapModel {
-    var name: String
-    var sources: [MGLShapeSource] = []
+    var name: String!
+    var sources: Set<MGLSource> = []
     var layers: [MGLStyleLayer] = []
     
     init(name:String) {
         self.name = name
     }
     
-    init(name:String, sources:[MGLShapeSource], layers:[MGLStyleLayer]) {
+    init(name:String, sources:Set<MGLSource>, layers:[MGLStyleLayer]) {
         self.name = name
         self.sources = sources
         self.layers = layers
     }
     
-    mutating func append(source:MGLShapeSource, layer:MGLStyleLayer) {
-        self.sources.append(source)
+    init(importDic:[String:Any]) {
+        self.name = String(describing: importDic["name"])
+        self.sources = importDic["sources"] as! Set<MGLSource>
+        self.layers = importDic["layers"] as! [MGLStyleLayer]
+    }
+    
+    mutating func append(source:MGLSource, layer:MGLStyleLayer) {
+        self.sources.insert(source)
         self.layers.append(layer)
     }
     
-    mutating func remove(index:Int) {
+    mutating func remove(source:MGLSource, layer:MGLStyleLayer) {
         if (self.sources.count < 1) { return }
-        self.sources.remove(at: index)
+        self.removeSource(source: source)
+        self.removeLayer(layer: layer)
+    }
+    
+    mutating func removeSource(source:MGLSource) {
+        self.sources.remove(source)
+    }
+    
+    mutating func removeLayer(layer:MGLStyleLayer) {
+        let index = self.layers.firstIndex(of: layer)!
         self.layers.remove(at: index)
-    }
-    
-    mutating func drawAll(mapView:MGLMapView) {
-        guard let style = mapView.style else { return }
-        for source in self.sources {
-            style.addSource(source)
-        }
-        for layer in self.layers {
-            style.addLayer(layer)
-        }
-    }
-    
-    mutating func draw(mapView:MGLMapView, source:MGLShapeSource, layer:MGLStyleLayer) -> Bool {
-        guard let style = mapView.style else { return true }
-        
-        //もし既に読み込まれているレイヤーならば、警告を出し何も処理しない
-        if (style.source(withIdentifier: source.identifier) != nil) { return true }
-        if (style.layer(withIdentifier: layer.identifier) != nil) { return true }
-        
-        self.append(source: source, layer: layer)
-        style.addSource(source)
-        style.addLayer(layer)
-        
-        return false
     }
     
     func export() -> [String:Any] {
         let exportDic:[String:Any] = [
-            "name":self.name,
+            "name":self.name!,
             "sources":self.sources,
             "layers":self.layers
         ]

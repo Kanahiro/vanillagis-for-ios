@@ -40,8 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mapVc.mapModel = newMapModel
         
         self.window?.rootViewController?.present(mapVc, animated: true, completion: nil)
-        
-        print(mapVc.mapModel)
         return true
     }
 

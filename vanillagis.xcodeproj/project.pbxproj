@@ -225,14 +225,22 @@
 		938BED44235364E400B19A81 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
-				93680CC22348AF3600E928B8 /* LayerView */,
 				9301CF2D231D37CF007B8FBD /* MapViewController.swift */,
-				938BED42235363C100B19A81 /* AttributesTableView.swift */,
-				938BED3E2353627F00B19A81 /* AttributesTableViewCell.swift */,
-				938BED3F2353627F00B19A81 /* AttributesTableViewCell.xib */,
+				93680CC22348AF3600E928B8 /* LayerView */,
+				93E56BD62353796B00E0CCDC /* AttributesTable */,
 				93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */,
 			);
 			path = MapView;
+			sourceTree = "<group>";
+		};
+		93E56BD62353796B00E0CCDC /* AttributesTable */ = {
+			isa = PBXGroup;
+			children = (
+				938BED42235363C100B19A81 /* AttributesTableView.swift */,
+				938BED3E2353627F00B19A81 /* AttributesTableViewCell.swift */,
+				938BED3F2353627F00B19A81 /* AttributesTableViewCell.xib */,
+			);
+			path = AttributesTable;
 			sourceTree = "<group>";
 		};
 		FCA04DEA1E706714F4867CF6 /* Pods */ = {

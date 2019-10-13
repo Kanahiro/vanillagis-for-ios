@@ -77,6 +77,10 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         return true
     }
     
+    func loadMapModel() {
+        return
+    }
+    
     //属性表示ウィンドウの初期化
     func initAnnotationTableView() {
         // ステータスバーの高さを取得
@@ -109,9 +113,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         } else {
             attributesTableView.isHidden = true
         }
-    }
-    
-    func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
     }
     
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
@@ -159,8 +160,58 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         present(docVc, animated: true, completion: nil)
     }
     
+    func addLayer(source:MGLSource, layer:MGLStyleLayer) -> Bool {
+        let style = self.mapView.style!
+        
+        //もし既に読み込まれているレイヤーならば、警告を出し何も処理しない
+        if (style.source(withIdentifier: source.identifier) != nil) { return true }
+        if (style.layer(withIdentifier: layer.identifier) != nil) { return true }
+        
+        style.addSource(source)
+        style.addLayer(layer)
+        
+        return false
+    }
+    
     @objc func saveMap(sender:UIBarButtonItem) {
-        print("save")
+        self.showSaveDialog()
+    }
+    
+    private func showSaveDialog() {
+        var alertTextField: UITextField?
+
+        let alert = UIAlertController(
+            title: "Save Your Map",
+            message: "Input Map Name",
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addTextField(
+            configurationHandler: {(textField: UITextField!) in
+                alertTextField = textField
+                textField.text = ""
+        })
+        alert.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: UIAlertAction.Style.cancel,
+                handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: UIAlertAction.Style.default) { _ in
+                    if alertTextField?.text != nil {
+                    self.storeMapToUserdefault(mapName: alertTextField?.text ?? "Unnamed Map")
+                }
+            }
+        )
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func storeMapToUserdefault(mapName:String) {
+        let sources = self.mapView.style!.sources
+        let layers = self.mapView.style!.layers
+        let newMapModel = MapModel(name: mapName, sources: sources, layers: layers)
+        print(newMapModel)
+        print(newMapModel.export())
     }
     
     @objc func showLayer(sender:UIBarButtonItem) {

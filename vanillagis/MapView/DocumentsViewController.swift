@@ -59,7 +59,7 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
             let source = gjSourceModel.makeSource()
             let layer = gjSourceModel.makeLayer()
             //set source and layer directly to the instance of previous ViewController
-            if (self.senderViewController.mapModel.draw(mapView:self.senderViewController.mapView, source: source, layer: layer)) {
+            if (self.senderViewController.addLayer(source: source, layer: layer)) {
                 print("error")
             }
         }
