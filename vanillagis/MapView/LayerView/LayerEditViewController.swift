@@ -238,22 +238,12 @@ class LayerEditViewController: UITableViewController {
                 title: "OK",
                 style: UIAlertAction.Style.default) { _ in
                     self.mapView.style!.removeLayer(self.layer)
+                    self.mapView.style!.removeSource(self.mapView.style!.source(withIdentifier: self.layer.identifier)!)
                     let superVC = self.presentingViewController as! LayerViewController
                     superVC.updateTableView()
                     self.dismiss(animated: true, completion: nil)
             }
         )
-
         self.present(alert, animated: true, completion: nil)
     }
-        
-    /*
-    // MARK: - Navigation
-     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

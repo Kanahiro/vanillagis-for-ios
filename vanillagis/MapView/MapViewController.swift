@@ -13,16 +13,16 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     var mapView:MGLMapView!
     var mapModel:MapModel!
     
+    var attributesTableView:AttributesTableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = mapModel.name
         
         self.initMapView()
+        self.initAnnotationTableView()
         self.initToolbar()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
     }
 
     func initMapView() {
@@ -65,18 +65,50 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
                 mapView.removeAnnotation(annotation)
             }
         }
-        
         // Get the CGPoint where the user tapped.
         let spot = sender.location(in: mapView)
          
         // Access the features at that point within the state layer.
         let features = mapView.visibleFeatures(at: spot)
-        print(features)
-        
+        toggleAnnotationWindow(features: features)
     }
      
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
+    }
+    
+    //属性表示ウィンドウの初期化
+    func initAnnotationTableView() {
+        // ステータスバーの高さを取得
+        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+        // ナビゲーションバーの高さを取得
+        let navBarHeight = self.navigationController?.navigationBar.frame.size.height
+        
+        attributesTableView = AttributesTableView(frame: CGRect(x: 0, y: statusBarHeight + navBarHeight!, width: self.view.bounds.size.width, height: 90))
+        attributesTableView.initTableView()
+        attributesTableView.isHidden = true
+        
+        self.view.addSubview(attributesTableView)
+    }
+    //annotationWindow on-off toggle
+    func toggleAnnotationWindow(features:[MGLFeature]) {
+        //クリックされた地物の属性をannotationTableViewに渡す
+        if (features.count > 0) {
+            let feature = features[0]
+            var headers:[String] = []
+            var values:[Any] = []
+            for (key, value) in feature.attributes {
+                headers.append(key)
+                values.append(value)
+            }
+            //tableviewで適切に表示するために配列として渡す
+            attributesTableView.headers = headers
+            attributesTableView.values = values
+            attributesTableView.tableView.reloadData()
+            attributesTableView.isHidden = false
+        } else {
+            attributesTableView.isHidden = true
+        }
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
@@ -144,6 +176,5 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
             self.mapView.userTrackingMode = .followWithHeading
         }
     }
-    
 }
 
