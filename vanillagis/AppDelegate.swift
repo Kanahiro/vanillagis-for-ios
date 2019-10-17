@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var navigationController: UINavigationController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         let first = FirstViewController()
         navigationController = UINavigationController(rootViewController: first)
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -37,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         let mapVc = MapViewController()
-        mapVc.mapModel = newMapModel
+        //mapVc.mapModel = newMapModel
         
         self.window?.rootViewController?.present(mapVc, animated: true, completion: nil)
         return true
@@ -64,7 +66,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

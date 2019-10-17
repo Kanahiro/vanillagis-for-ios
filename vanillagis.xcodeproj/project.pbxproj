@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1DA55D0E5201D59C168BE9F9 /* libPods-vanillagis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C309FB50AF27784CFFB1DA4 /* libPods-vanillagis.a */; };
+		6FE0AE62D8EBBAEF9E5D4ED8 /* Pods_vanillagis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A603FAC4955D350FDB7681A9 /* Pods_vanillagis.framework */; };
 		9301CF2C231D37CF007B8FBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9301CF2B231D37CF007B8FBD /* AppDelegate.swift */; };
 		9301CF2E231D37CF007B8FBD /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9301CF2D231D37CF007B8FBD /* MapViewController.swift */; };
 		9301CF33231D37D1007B8FBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9301CF32231D37D1007B8FBD /* Assets.xcassets */; };
@@ -30,7 +30,7 @@
 		93680CBF234881F400E928B8 /* LayerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93680CBD234881F400E928B8 /* LayerViewCell.xib */; };
 		938BED402353627F00B19A81 /* AttributesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938BED3E2353627F00B19A81 /* AttributesTableViewCell.swift */; };
 		938BED412353627F00B19A81 /* AttributesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 938BED3F2353627F00B19A81 /* AttributesTableViewCell.xib */; };
-		938BED43235363C100B19A81 /* AttributesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938BED42235363C100B19A81 /* AttributesTableView.swift */; };
+		938BED43235363C100B19A81 /* AttributesWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938BED42235363C100B19A81 /* AttributesWindowView.swift */; };
 		93D791E6234A1C1300E78980 /* LayerEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D791E4234A1C1300E78980 /* LayerEditViewController.swift */; };
 		93D79229234B657800E78980 /* LayerEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D79228234B657800E78980 /* LayerEditViewController.storyboard */; };
 /* End PBXBuildFile section */
@@ -55,7 +55,6 @@
 /* Begin PBXFileReference section */
 		4F9F5F9C1185112342FDEAAB /* Pods-vanillagis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vanillagis.debug.xcconfig"; path = "Target Support Files/Pods-vanillagis/Pods-vanillagis.debug.xcconfig"; sourceTree = "<group>"; };
 		80424D941E6767395423E4D4 /* Pods-vanillagis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vanillagis.release.xcconfig"; path = "Target Support Files/Pods-vanillagis/Pods-vanillagis.release.xcconfig"; sourceTree = "<group>"; };
-		8C309FB50AF27784CFFB1DA4 /* libPods-vanillagis.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vanillagis.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9301CF28231D37CF007B8FBD /* vanillagis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vanillagis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9301CF2B231D37CF007B8FBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9301CF2D231D37CF007B8FBD /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -84,9 +83,10 @@
 		93680CBD234881F400E928B8 /* LayerViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LayerViewCell.xib; sourceTree = "<group>"; };
 		938BED3E2353627F00B19A81 /* AttributesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesTableViewCell.swift; sourceTree = "<group>"; };
 		938BED3F2353627F00B19A81 /* AttributesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttributesTableViewCell.xib; sourceTree = "<group>"; };
-		938BED42235363C100B19A81 /* AttributesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesTableView.swift; sourceTree = "<group>"; };
+		938BED42235363C100B19A81 /* AttributesWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesWindowView.swift; sourceTree = "<group>"; };
 		93D791E4234A1C1300E78980 /* LayerEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerEditViewController.swift; sourceTree = "<group>"; };
 		93D79228234B657800E78980 /* LayerEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LayerEditViewController.storyboard; sourceTree = "<group>"; };
+		A603FAC4955D350FDB7681A9 /* Pods_vanillagis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vanillagis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93182A732330F39A000DC0C1 /* CoreLocation.framework in Frameworks */,
-				1DA55D0E5201D59C168BE9F9 /* libPods-vanillagis.a in Frameworks */,
+				6FE0AE62D8EBBAEF9E5D4ED8 /* Pods_vanillagis.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				93182A722330F39A000DC0C1 /* CoreLocation.framework */,
-				8C309FB50AF27784CFFB1DA4 /* libPods-vanillagis.a */,
+				A603FAC4955D350FDB7681A9 /* Pods_vanillagis.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -236,7 +236,7 @@
 		93E56BD62353796B00E0CCDC /* AttributesTable */ = {
 			isa = PBXGroup;
 			children = (
-				938BED42235363C100B19A81 /* AttributesTableView.swift */,
+				938BED42235363C100B19A81 /* AttributesWindowView.swift */,
 				938BED3E2353627F00B19A81 /* AttributesTableViewCell.swift */,
 				938BED3F2353627F00B19A81 /* AttributesTableViewCell.xib */,
 			);
@@ -438,7 +438,7 @@
 				9335016E232B7D31006CFCCA /* MapModel.swift in Sources */,
 				93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */,
 				9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */,
-				938BED43235363C100B19A81 /* AttributesTableView.swift in Sources */,
+				938BED43235363C100B19A81 /* AttributesWindowView.swift in Sources */,
 				93D791E6234A1C1300E78980 /* LayerEditViewController.swift in Sources */,
 				93680CBE234881F400E928B8 /* LayerViewCell.swift in Sources */,
 				93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */,

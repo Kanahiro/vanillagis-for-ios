@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Mapbox
 
-class AttributesTableView: UIView, UITableViewDelegate, UITableViewDataSource {
+class AttributesWindowView: UIView, UITableViewDelegate, UITableViewDataSource {
     var headers:[String]!
     var values:[Any]!
     var tableView:UITableView!

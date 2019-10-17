@@ -11,13 +11,17 @@ import UIKit
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableView: UITableView!
+    var mapModels: [MapModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Vanilla GIS"
         
         self.createDocumentDir()
+        
         self.initNewButton()
+        self.loadUserdefaults()
         self.initTableView()
     }
     
@@ -34,10 +38,17 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.addSubview(tableView)
     }
     
+    func loadUserdefaults() {
+        //get mapmodel data from userdefaults
+        if let storedData = UserDefaults.standard.object(forKey: "MapModels") as? Data {
+             if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? [MapModel] {
+                self.mapModels = unarchivedObject
+             }
+         }
+    }
+    
     @objc func pushNewButton(sender: UIButton){
         let mapVc = MapViewController()
-        let newMapModel = MapModel(name: "New Map")
-        mapVc.mapModel = newMapModel
         self.navigationController?.pushViewController(mapVc, animated: true)
     }
     
@@ -45,10 +56,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func createDocumentDir() {
         let fm = FileManager.default
         let documentsPath = NSHomeDirectory() + "/Documents"
-        let stylesDir = "/styles"
+        let mapsDir = "/maps"
         let geojsonsDir = "/geojsons"
         do {
-            try fm.createDirectory(atPath: (documentsPath + stylesDir) , withIntermediateDirectories: false, attributes: [:])
+            try fm.createDirectory(atPath: (documentsPath + mapsDir) , withIntermediateDirectories: false, attributes: [:])
             try fm.createDirectory(atPath: (documentsPath + geojsonsDir) , withIntermediateDirectories: false, attributes: [:])
         } catch {
         }
@@ -72,15 +83,30 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        let mapsPath = NSHomeDirectory() + "/Documents/maps"
+        guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: mapsPath) else {
+            return 0
+        }
+        return fileNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let mapsPath = NSHomeDirectory() + "/Documents/maps"
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = "a"
+        guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: mapsPath) else {
+            return cell
+        }
+        cell.textLabel?.text = fileNames[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let mapVc = MapViewController()
+        let mapsPath = NSHomeDirectory() + "/Documents/maps"
+        guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: mapsPath) else {
+            return
+        }
+        
+        self.navigationController?.pushViewController(mapVc, animated: true)
     }
 }

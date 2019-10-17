@@ -7,10 +7,27 @@
 //
 
 import Foundation
+import UIKit
 import Mapbox
 
-struct MapModel {
-    var name: String!
+
+class MapModel: NSObject, NSCoding {
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.name, forKey: "name")
+        aCoder.encode(self.sources, forKey: "sources")
+        aCoder.encode(self.layers, forKey: "layers")
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init()
+        self.name = aDecoder.decodeObject(forKey: "name") as! String
+        self.sources = aDecoder.decodeObject(forKey: "sources") as! Set<MGLSource>
+        self.layers = aDecoder.decodeObject(forKey: "layers") as! [MGLStyleLayer]
+    }
+    
+    //class vars
+    var name: String = "Unnamed"
     var sources: Set<MGLSource> = []
     var layers: [MGLStyleLayer] = []
     
@@ -30,29 +47,29 @@ struct MapModel {
         self.layers = importDic["layers"] as! [MGLStyleLayer]
     }
     
-    mutating func append(source:MGLSource, layer:MGLStyleLayer) {
+    func append(source:MGLSource, layer:MGLStyleLayer) {
         self.sources.insert(source)
         self.layers.append(layer)
     }
     
-    mutating func remove(source:MGLSource, layer:MGLStyleLayer) {
+    func remove(source:MGLSource, layer:MGLStyleLayer) {
         if (self.sources.count < 1) { return }
         self.removeSource(source: source)
         self.removeLayer(layer: layer)
     }
     
-    mutating func removeSource(source:MGLSource) {
+    func removeSource(source:MGLSource) {
         self.sources.remove(source)
     }
     
-    mutating func removeLayer(layer:MGLStyleLayer) {
+    func removeLayer(layer:MGLStyleLayer) {
         let index = self.layers.firstIndex(of: layer)!
         self.layers.remove(at: index)
     }
     
-    func export() -> [String:Any] {
-        let exportDic:[String:Any] = [
-            "name":self.name!,
+    func export() -> NSDictionary {
+        let exportDic:NSDictionary = [
+            "name":self.name,
             "sources":self.sources,
             "layers":self.layers
         ]

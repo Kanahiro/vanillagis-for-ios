@@ -11,16 +11,14 @@ import Mapbox
 
 class MapViewController: UIViewController, MGLMapViewDelegate {
     var mapView:MGLMapView!
-    var mapModel:MapModel!
     
-    var attributesTableView:AttributesTableView!
+    var attributesWindowView:AttributesWindowView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = mapModel.name
-        
         self.initMapView()
+        self.initMapModel()
         self.initAnnotationTableView()
         self.initToolbar()
     }
@@ -77,8 +75,16 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         return true
     }
     
-    func loadMapModel() {
-        return
+    func initMapModel() {
+        /*
+        if (self.realmMapModel != nil) {
+            self.title = realmMapModel!.name
+            self.mapView.style!.sources = realmMapModel!.sources
+            self.mapView.style!.layers = realmMapModel!.layers
+        } else {
+            self.title = "New Map"
+        }
+         */
     }
     
     //属性表示ウィンドウの初期化
@@ -88,11 +94,11 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         // ナビゲーションバーの高さを取得
         let navBarHeight = self.navigationController?.navigationBar.frame.size.height
         
-        attributesTableView = AttributesTableView(frame: CGRect(x: 0, y: statusBarHeight + navBarHeight!, width: self.view.bounds.size.width, height: 90))
-        attributesTableView.initTableView()
-        attributesTableView.isHidden = true
+        attributesWindowView = AttributesWindowView(frame: CGRect(x: 0, y: statusBarHeight + navBarHeight!, width: self.view.bounds.size.width, height: 90))
+        attributesWindowView.initTableView()
+        attributesWindowView.isHidden = true
         
-        self.view.addSubview(attributesTableView)
+        self.view.addSubview(attributesWindowView)
     }
     //annotationWindow on-off toggle
     func toggleAnnotationWindow(features:[MGLFeature]) {
@@ -106,12 +112,12 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
                 values.append(value)
             }
             //tableviewで適切に表示するために配列として渡す
-            attributesTableView.headers = headers
-            attributesTableView.values = values
-            attributesTableView.tableView.reloadData()
-            attributesTableView.isHidden = false
+            attributesWindowView.headers = headers
+            attributesWindowView.values = values
+            attributesWindowView.tableView.reloadData()
+            attributesWindowView.isHidden = false
         } else {
-            attributesTableView.isHidden = true
+            attributesWindowView.isHidden = true
         }
     }
     
@@ -178,7 +184,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     }
     
     private func showSaveDialog() {
-        var alertTextField: UITextField?
+        var alertTextField: UITextField!
 
         let alert = UIAlertController(
             title: "Save Your Map",
@@ -198,20 +204,25 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
             UIAlertAction(
                 title: "OK",
                 style: UIAlertAction.Style.default) { _ in
-                    if alertTextField?.text != nil {
-                    self.storeMapToUserdefault(mapName: alertTextField?.text ?? "Unnamed Map")
+                    if alertTextField.text != nil {
+                        self.storeMapModelToRealm(mapName: alertTextField.text!)
                 }
             }
         )
         self.present(alert, animated: true, completion: nil)
     }
     
-    func storeMapToUserdefault(mapName:String) {
+    func storeMapModelToRealm(mapName:String) {
         let sources = self.mapView.style!.sources
         let layers = self.mapView.style!.layers
         let newMapModel = MapModel(name: mapName, sources: sources, layers: layers)
-        print(newMapModel)
-        print(newMapModel.export())
+        let mapModelData = try! NSKeyedArchiver.archivedData(withRootObject: newMapModel, requiringSecureCoding: false)
+        print(mapModelData)
+        
+        
+        
+        //re-set mapmodel
+        self.initMapModel()
     }
     
     @objc func showLayer(sender:UIBarButtonItem) {
