@@ -11,14 +11,16 @@ import Mapbox
 
 class MapViewController: UIViewController, MGLMapViewDelegate {
     var mapView:MGLMapView!
-    
+    var basemapSources:Set<MGLSource>!
+    var basemapLayers:[MGLStyleLayer]!
+    var mapModel:MapModel!
     var attributesWindowView:AttributesWindowView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.initMapView()
-        self.initMapModel()
+        self.loadMapModel()
         self.initAnnotationTableView()
         self.initToolbar()
     }
@@ -36,8 +38,9 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         
         let rect = CGRect(x: 0, y: statusBarHeight + navBarHeight!, width: self.view.bounds.size.width, height: self.view.bounds.size.height - (statusBarHeight + navBarHeight! + 42))
         mapView = MGLMapView(frame: rect, styleURL: tmpStyleUrl!)
+        
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.setCenter(CLLocationCoordinate2D(latitude: 44.2, longitude: 142.4), zoomLevel: 9, animated: false)
+        mapView.setCenter(CLLocationCoordinate2D(latitude: 38.0, longitude: 135.0), zoomLevel: 3, animated: false)
         
         mapView.maximumZoomLevel = 18
         mapView.minimumZoomLevel = 0
@@ -75,16 +78,11 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         return true
     }
     
-    func initMapModel() {
-        /*
-        if (self.realmMapModel != nil) {
-            self.title = realmMapModel!.name
-            self.mapView.style!.sources = realmMapModel!.sources
-            self.mapView.style!.layers = realmMapModel!.layers
-        } else {
-            self.title = "New Map"
+    func loadMapModel() {
+        if (self.mapModel == nil) {
+            self.mapModel = MapModel(name: "New Map")
         }
-         */
+        self.title = self.mapModel.name
     }
     
     //属性表示ウィンドウの初期化
@@ -123,6 +121,11 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
         self.initUserLocation()
+    }
+    
+    //mapviewの描画完了後、ベースマップのsourcesとlayersを保存
+    func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
+        self.mapModel.showAllLayer(mapView: mapView)
     }
     
     func initUserLocation() {
@@ -166,19 +169,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         present(docVc, animated: true, completion: nil)
     }
     
-    func addLayer(source:MGLSource, layer:MGLStyleLayer) -> Bool {
-        let style = self.mapView.style!
-        
-        //もし既に読み込まれているレイヤーならば、警告を出し何も処理しない
-        if (style.source(withIdentifier: source.identifier) != nil) { return true }
-        if (style.layer(withIdentifier: layer.identifier) != nil) { return true }
-        
-        style.addSource(source)
-        style.addLayer(layer)
-        
-        return false
-    }
-    
     @objc func saveMap(sender:UIBarButtonItem) {
         self.showSaveDialog()
     }
@@ -188,12 +178,12 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
 
         let alert = UIAlertController(
             title: "Save Your Map",
-            message: "Input Map Name",
+            message: "Input Map Name. Always overwrite if same-name file exist.",
             preferredStyle: UIAlertController.Style.alert)
         alert.addTextField(
             configurationHandler: {(textField: UITextField!) in
                 alertTextField = textField
-                textField.text = ""
+                textField.text = self.mapModel.name
         })
         alert.addAction(
             UIAlertAction(
@@ -205,24 +195,41 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
                 title: "OK",
                 style: UIAlertAction.Style.default) { _ in
                     if alertTextField.text != nil {
-                        self.storeMapModelToRealm(mapName: alertTextField.text!)
+                        self.writeMapModel(mapName: alertTextField.text!)
                 }
             }
         )
         self.present(alert, animated: true, completion: nil)
     }
     
-    func storeMapModelToRealm(mapName:String) {
-        let sources = self.mapView.style!.sources
-        let layers = self.mapView.style!.layers
-        let newMapModel = MapModel(name: mapName, sources: sources, layers: layers)
-        let mapModelData = try! NSKeyedArchiver.archivedData(withRootObject: newMapModel, requiringSecureCoding: false)
-        print(mapModelData)
-        
-        
-        
-        //re-set mapmodel
-        self.initMapModel()
+    func writeMapModel(mapName:String) {
+        self.mapModel.name = mapName
+        self.mapModel.removeLayersInAllLayerSet(layers: self.mapView.style!.layers)
+        self.mapModel.apllyLayerSettingsForAllLayerSets(layers: self.mapView.style!.layers)
+        let archivedData = NSKeyedArchiver.archivedData(withRootObject: mapModel)
+        let outputPath = NSHomeDirectory() + "/Documents/maps/" + mapName + ".vgs"
+        do {
+            try? archivedData.write(to: URL(fileURLWithPath: outputPath))
+        } catch {
+            self.showDialog(title:"Failure", message:"Error occured!")
+            return
+        }
+        self.showDialog(title:"Success", message:"Writing file has completed!")
+    }
+    
+    private func showDialog(title:String, message:String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: UIAlertAction.Style.default,
+                handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc func showLayer(sender:UIBarButtonItem) {

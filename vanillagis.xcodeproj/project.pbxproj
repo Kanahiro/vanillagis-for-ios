@@ -19,8 +19,10 @@
 		93182A6F232E7201000DC0C1 /* test.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 93350174232E63E1006CFCCA /* test.geojson */; };
 		93182A71232F5AFC000DC0C1 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */; };
 		93182A732330F39A000DC0C1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93182A722330F39A000DC0C1 /* CoreLocation.framework */; };
+		9324587923606B54002E0D36 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9324587723606B54002E0D36 /* SettingViewController.swift */; };
+		9324587C23606BC5002E0D36 /* SettingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9324587B23606BC5002E0D36 /* SettingViewController.storyboard */; };
 		93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350158232143C6006CFCCA /* DataSourceModel.swift */; };
-		93350167232A37D7006CFCCA /* GeoJsonSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */; };
+		93350167232A37D7006CFCCA /* GeoJsonSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350166232A37D7006CFCCA /* GeoJsonSource.swift */; };
 		9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016B232B240D006CFCCA /* FirstViewController.swift */; };
 		9335016E232B7D31006CFCCA /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016D232B7D31006CFCCA /* MapModel.swift */; };
 		93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350170232BBEC9006CFCCA /* MapStyleManager.swift */; };
@@ -31,6 +33,7 @@
 		938BED402353627F00B19A81 /* AttributesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938BED3E2353627F00B19A81 /* AttributesTableViewCell.swift */; };
 		938BED412353627F00B19A81 /* AttributesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 938BED3F2353627F00B19A81 /* AttributesTableViewCell.xib */; };
 		938BED43235363C100B19A81 /* AttributesWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938BED42235363C100B19A81 /* AttributesWindowView.swift */; };
+		93D623EA235DEAF800181ABC /* LayerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D623E9235DEAF800181ABC /* LayerSet.swift */; };
 		93D791E6234A1C1300E78980 /* LayerEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D791E4234A1C1300E78980 /* LayerEditViewController.swift */; };
 		93D79229234B657800E78980 /* LayerEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D79228234B657800E78980 /* LayerEditViewController.storyboard */; };
 /* End PBXBuildFile section */
@@ -55,7 +58,7 @@
 /* Begin PBXFileReference section */
 		4F9F5F9C1185112342FDEAAB /* Pods-vanillagis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vanillagis.debug.xcconfig"; path = "Target Support Files/Pods-vanillagis/Pods-vanillagis.debug.xcconfig"; sourceTree = "<group>"; };
 		80424D941E6767395423E4D4 /* Pods-vanillagis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vanillagis.release.xcconfig"; path = "Target Support Files/Pods-vanillagis/Pods-vanillagis.release.xcconfig"; sourceTree = "<group>"; };
-		9301CF28231D37CF007B8FBD /* vanillagis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vanillagis.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9301CF28231D37CF007B8FBD /* Vanilla GIS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vanilla GIS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9301CF2B231D37CF007B8FBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9301CF2D231D37CF007B8FBD /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9301CF32231D37D1007B8FBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,8 +74,10 @@
 		9306722B231EAA52004F1CCA /* sample.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample.geojson; sourceTree = "<group>"; };
 		93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		93182A722330F39A000DC0C1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9324587723606B54002E0D36 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		9324587B23606BC5002E0D36 /* SettingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingViewController.storyboard; sourceTree = "<group>"; };
 		93350158232143C6006CFCCA /* DataSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceModel.swift; sourceTree = "<group>"; };
-		93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonSourceModel.swift; sourceTree = "<group>"; };
+		93350166232A37D7006CFCCA /* GeoJsonSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonSource.swift; sourceTree = "<group>"; };
 		9335016B232B240D006CFCCA /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		9335016D232B7D31006CFCCA /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		93350170232BBEC9006CFCCA /* MapStyleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyleManager.swift; sourceTree = "<group>"; };
@@ -84,6 +89,7 @@
 		938BED3E2353627F00B19A81 /* AttributesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesTableViewCell.swift; sourceTree = "<group>"; };
 		938BED3F2353627F00B19A81 /* AttributesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttributesTableViewCell.xib; sourceTree = "<group>"; };
 		938BED42235363C100B19A81 /* AttributesWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesWindowView.swift; sourceTree = "<group>"; };
+		93D623E9235DEAF800181ABC /* LayerSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerSet.swift; sourceTree = "<group>"; };
 		93D791E4234A1C1300E78980 /* LayerEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerEditViewController.swift; sourceTree = "<group>"; };
 		93D79228234B657800E78980 /* LayerEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LayerEditViewController.storyboard; sourceTree = "<group>"; };
 		A603FAC4955D350FDB7681A9 /* Pods_vanillagis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vanillagis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,7 +146,7 @@
 		9301CF29231D37CF007B8FBD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9301CF28231D37CF007B8FBD /* vanillagis.app */,
+				9301CF28231D37CF007B8FBD /* Vanilla GIS.app */,
 				9301CF3C231D37D1007B8FBD /* vanillagisTests.xctest */,
 				9301CF47231D37D2007B8FBD /* vanillagisUITests.xctest */,
 			);
@@ -152,10 +158,12 @@
 			children = (
 				9301CF2B231D37CF007B8FBD /* AppDelegate.swift */,
 				9335016B232B240D006CFCCA /* FirstViewController.swift */,
+				9324587723606B54002E0D36 /* SettingViewController.swift */,
+				9324587B23606BC5002E0D36 /* SettingViewController.storyboard */,
 				938BED44235364E400B19A81 /* MapView */,
 				9335016F232BBEAF006CFCCA /* Utils */,
 				93350165232A36CE006CFCCA /* DataSourceModel */,
-				93350168232A450C006CFCCA /* MapModel */,
+				93350168232A450C006CFCCA /* Model */,
 				9301CF32231D37D1007B8FBD /* Assets.xcassets */,
 				9301CF34231D37D1007B8FBD /* LaunchScreen.storyboard */,
 				9301CF37231D37D1007B8FBD /* Info.plist */,
@@ -188,18 +196,19 @@
 			isa = PBXGroup;
 			children = (
 				93350158232143C6006CFCCA /* DataSourceModel.swift */,
-				93350166232A37D7006CFCCA /* GeoJsonSourceModel.swift */,
+				93350166232A37D7006CFCCA /* GeoJsonSource.swift */,
 				93350172232E5876006CFCCA /* ShapefileSourceModel.swift */,
 			);
 			path = DataSourceModel;
 			sourceTree = "<group>";
 		};
-		93350168232A450C006CFCCA /* MapModel */ = {
+		93350168232A450C006CFCCA /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				9335016D232B7D31006CFCCA /* MapModel.swift */,
+				93D623E9235DEAF800181ABC /* LayerSet.swift */,
 			);
-			path = MapModel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9335016F232BBEAF006CFCCA /* Utils */ = {
@@ -271,7 +280,7 @@
 			);
 			name = vanillagis;
 			productName = vanillagis;
-			productReference = 9301CF28231D37CF007B8FBD /* vanillagis.app */;
+			productReference = 9301CF28231D37CF007B8FBD /* Vanilla GIS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9301CF3B231D37D1007B8FBD /* vanillagisTests */ = {
@@ -358,6 +367,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9324587C23606BC5002E0D36 /* SettingViewController.storyboard in Resources */,
 				93680CBF234881F400E928B8 /* LayerViewCell.xib in Resources */,
 				93182A6F232E7201000DC0C1 /* test.geojson in Resources */,
 				9301CF36231D37D1007B8FBD /* LaunchScreen.storyboard in Resources */,
@@ -434,7 +444,9 @@
 			files = (
 				93680CB52346027C00E928B8 /* LayerViewController.swift in Sources */,
 				93350173232E5876006CFCCA /* ShapefileSourceModel.swift in Sources */,
-				93350167232A37D7006CFCCA /* GeoJsonSourceModel.swift in Sources */,
+				93D623EA235DEAF800181ABC /* LayerSet.swift in Sources */,
+				9324587923606B54002E0D36 /* SettingViewController.swift in Sources */,
+				93350167232A37D7006CFCCA /* GeoJsonSource.swift in Sources */,
 				9335016E232B7D31006CFCCA /* MapModel.swift in Sources */,
 				93350159232143C6006CFCCA /* DataSourceModel.swift in Sources */,
 				9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */,
@@ -614,6 +626,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = 8WN4A2PC78;
 				INFOPLIST_FILE = vanillagis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -621,10 +634,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagis;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Vanilla GIS";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -634,6 +648,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = 8WN4A2PC78;
 				INFOPLIST_FILE = vanillagis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -641,10 +656,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagis;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Vanilla GIS";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

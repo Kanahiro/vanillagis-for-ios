@@ -30,12 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let jsonUrl = url
 
-        let geojson = GeoJsonSourceModel(filepath:jsonUrl)
-        let source = geojson.makeSource()
-        let layer = geojson.makeLayer()
+        let geojson = GeoJsonSource(filepath:jsonUrl)
         
         var newMapModel = MapModel(name: "New Map")
-        newMapModel.append(source: source, layer: layer)
 
         
         let mapVc = MapViewController()

@@ -20,7 +20,6 @@
 				<string>public.geojson</string>
 			</array>
 		</dict>
-		<dict/>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -33,9 +32,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
@@ -43,7 +42,7 @@
 	<key>MGLMapboxAccessToken_OLD</key>
 	<string>pk.eyJ1Ijoia2FuYWhpcm8iLCJhIjoiY2pwMnV4bDRjMGFkajNrbGtva3ZvYXdrZyJ9._4HC0CsOmu2gHVKtjxcURA</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Show your location on the map.</string>
+	<string>地図上にあなたの現在地を表示出来ます。</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

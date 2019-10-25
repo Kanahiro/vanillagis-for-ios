@@ -33,6 +33,7 @@ class LayerEditViewController: UITableViewController {
     @IBOutlet weak var heatmapSwitch: UISwitch!
     
     //general
+    @IBOutlet weak var deleteButton: UIButton!
     @IBAction func deleteButtonPushed(_ sender: UIButton) {
         self.showDeletionAlert()
     }
@@ -71,6 +72,7 @@ class LayerEditViewController: UITableViewController {
         case "MGLRasterStyleLayer":
             let rasterLayer = self.layer! as! MGLRasterStyleLayer
             rasterOpacity.value = rasterLayer.rasterOpacity.expressionValue(with: nil, context: nil) as! Float
+            deleteButton.isHidden = true
         case "MGLFillStyleLayer":
             let polygonLayer = self.layer! as! MGLFillStyleLayer
             fillOpacity.value = polygonLayer.fillOpacity.expressionValue(with: nil, context: nil) as! Float

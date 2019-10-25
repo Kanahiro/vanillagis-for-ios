@@ -250,6 +250,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="deleteButton" destination="FSm-qf-71H" id="fIf-H0-3HF"/>
                         <outlet property="fillOpacity" destination="Gb8-7X-yb1" id="Buw-6u-fFm"/>
                         <outlet property="heatmapSwitch" destination="vp7-Hh-7Eq" id="1Ia-2t-8iI"/>
                         <outlet property="lineColorSliderView" destination="0DV-5R-QiS" id="A4q-xn-cZH"/>

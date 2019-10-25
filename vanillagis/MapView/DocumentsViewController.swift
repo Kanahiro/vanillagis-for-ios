@@ -7,7 +7,6 @@
 //
 
 //与えられたdirectoryに存在するすべてのファイルを一覧表示するビュー
-//選択されたファイルは遷移元のビューのインスタンスへ直接入力される
 
 import Foundation
 import UIKit
@@ -50,18 +49,18 @@ class DocumentsViewController:UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DispatchQueue.global(qos: .userInteractive).async {
-            //選択されたgeojsonファイルのデータを、遷移元のビューコントローラのインスタンスに渡す
             guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: self.directory) else {
                 return
             }
             let filepath = URL(fileURLWithPath: self.directory + "/" + fileNames[indexPath.row])
-            let gjSourceModel = GeoJsonSourceModel(filepath: filepath)
-            let source = gjSourceModel.makeSource()
-            let layer = gjSourceModel.makeLayer()
-            //set source and layer directly to the instance of previous ViewController
-            if (self.senderViewController.addLayer(source: source, layer: layer)) {
-                print("error")
-            }
+            
+            let gjSource = GeoJsonSource(filepath: filepath)
+            
+            let mapModel = self.senderViewController.mapModel!
+            let mapView = self.senderViewController.mapView!
+            
+            mapModel.addData(dataSource: gjSource)
+            mapModel.showLayer(mapView: mapView, layerSet: mapModel.layerSets.last!)
         }
         self.dismiss(animated: true, completion: nil)
     }

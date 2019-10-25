@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FirstViewController: UIViewController {
     var tableView: UITableView!
     var mapModels: [MapModel] = []
     
@@ -20,13 +20,23 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.createDocumentDir()
         
+        self.initSettingButton()
         self.initNewButton()
         self.loadUserdefaults()
         self.initTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
+    func initSettingButton() {
+        let settingBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.pushSettingButton(sender:)))
+        self.navigationItem.leftBarButtonItem = settingBtn
+    }
+    
     func initNewButton() {
-        let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.pushNewButton(sender:)))
+        let addBtn = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(self.pushNewButton(sender:)))
         self.navigationItem.rightBarButtonItem = addBtn
     }
     
@@ -52,7 +62,14 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.pushViewController(mapVc, animated: true)
     }
     
+    @objc func pushSettingButton(sender: UIButton){
+        let sb = UIStoryboard(name: "SettingViewController", bundle: nil)
+        guard let settingVc = sb.instantiateInitialViewController() as? SettingViewController else { return }
+        self.navigationController?.pushViewController(settingVc, animated: true)
+    }
+    
     //ファイルアプリにvanillagisフォルダを作成する
+    //geojson読み込みフォルダ、mapModel保存フォルダ
     func createDocumentDir() {
         let fm = FileManager.default
         let documentsPath = NSHomeDirectory() + "/Documents"
@@ -63,25 +80,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             try fm.createDirectory(atPath: (documentsPath + geojsonsDir) , withIntermediateDirectories: false, attributes: [:])
         } catch {
         }
-        
-        /*
-        //default.jsonを保存
-         let filename = "/testest.geojson"
-         let filePath = documentsPath + geojsonsDir + filename
-         if fm.fileExists(atPath: filePath) {return}
-         
-         var fileData:Data?
-         do {
-         let fileUrl = Bundle.main.url(forResource: "sample", withExtension: "geojson")
-         fileData = try Data(contentsOf: fileUrl!)
-         } catch {
-         fileData = nil
-         }
-         
-         fm.createFile(atPath: filePath, contents: fileData, attributes: [:])
-         */
+
     }
     
+}
+extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let mapsPath = NSHomeDirectory() + "/Documents/maps"
         guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: mapsPath) else {
@@ -97,6 +100,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return cell
         }
         cell.textLabel?.text = fileNames[indexPath.row]
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
@@ -106,6 +110,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: mapsPath) else {
             return
         }
+        
+        let selectedPath = URL(fileURLWithPath: mapsPath + "/" + fileNames[indexPath.row])
+        let mapData = try! Data(contentsOf: selectedPath)
+        let loadedMap = NSKeyedUnarchiver.unarchiveObject(with: mapData) as! MapModel
+        mapVc.mapModel = loadedMap
         
         self.navigationController?.pushViewController(mapVc, animated: true)
     }
