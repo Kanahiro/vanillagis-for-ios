@@ -9,48 +9,55 @@
 import UIKit
 import Mapbox
 
-class MapViewController: UIViewController, MGLMapViewDelegate {
+class MapViewController: UIViewController {
     var mapView:MGLMapView!
-    var basemapSources:Set<MGLSource>!
-    var basemapLayers:[MGLStyleLayer]!
+
     var mapModel:MapModel!
     var attributesWindowView:AttributesWindowView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setMapTitle()
+        
         self.initMapView()
-        self.loadMapModel()
         self.initAnnotationTableView()
         self.initToolbar()
     }
+    
+    func setMapTitle() {
+        if (self.mapModel == nil) {
+            self.mapModel = MapModel(name: "New Map")
+        }
+        self.title = self.mapModel.name
+    }
 
-    func initMapView() {
+    func makeDefaultStyleURL() -> URL? {
         var msManager = MapStyleManager()
         msManager.applyDefault()
-        //write temp-jsonfile as tmp.json, because MGLMapView needs styleURL to be initialized.
-        let tmpStyleUrl = msManager.writeJson(outputDir: "/tmp", filename: "style")
-        
+        //write temp-jsonfile as tmp.json, because MGLMapView needs styleURL to initialize.
+        return msManager.writeJson(outputDir: "/tmp", filename: "style")
+    }
+    
+    func initMapView() {
         // ステータスバーの高さを取得
         let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
         // ナビゲーションバーの高さを取得
         let navBarHeight = self.navigationController?.navigationBar.frame.size.height
-        
+        //mapViewエリアを設定
         let rect = CGRect(x: 0, y: statusBarHeight + navBarHeight!, width: self.view.bounds.size.width, height: self.view.bounds.size.height - (statusBarHeight + navBarHeight! + 42))
-        mapView = MGLMapView(frame: rect, styleURL: tmpStyleUrl!)
         
+        mapView = MGLMapView(frame: rect, styleURL: self.makeDefaultStyleURL()!)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.setCenter(CLLocationCoordinate2D(latitude: 38.0, longitude: 135.0), zoomLevel: 3, animated: false)
-        
         mapView.maximumZoomLevel = 18
         mapView.minimumZoomLevel = 0
-        
         mapView.backgroundColor = .white
-        
         mapView.delegate = self
         
         self.view.addSubview(mapView)
         
+        //mapview tap event
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(sender:)))
         for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
             singleTap.require(toFail: recognizer)
@@ -72,17 +79,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         // Access the features at that point within the state layer.
         let features = mapView.visibleFeatures(at: spot)
         toggleAnnotationWindow(features: features)
-    }
-     
-    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-        return true
-    }
-    
-    func loadMapModel() {
-        if (self.mapModel == nil) {
-            self.mapModel = MapModel(name: "New Map")
-        }
-        self.title = self.mapModel.name
     }
     
     //属性表示ウィンドウの初期化
@@ -117,15 +113,6 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         } else {
             attributesWindowView.isHidden = true
         }
-    }
-    
-    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        self.initUserLocation()
-    }
-    
-    //mapviewの描画完了後、ベースマップのsourcesとlayersを保存
-    func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
-        self.mapModel.showAllLayer(mapView: mapView)
     }
     
     func initUserLocation() {
@@ -164,18 +151,13 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     //open documentsVC and add Layer to MapView
     @objc func addDocument(sender:UIBarButtonItem) {
         let docVc = DocumentsViewController()
-        docVc.directory = NSHomeDirectory() + "/Documents" + "/geojsons"
+        docVc.directory = NSHomeDirectory() + "/Documents/geojsons"
         docVc.senderViewController = self
         present(docVc, animated: true, completion: nil)
     }
     
     @objc func saveMap(sender:UIBarButtonItem) {
-        self.showSaveDialog()
-    }
-    
-    private func showSaveDialog() {
         var alertTextField: UITextField!
-
         let alert = UIAlertController(
             title: "Save Your Map",
             message: "Input Map Name. Always overwrite if same-name file exist.",
@@ -206,10 +188,10 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         self.mapModel.name = mapName
         self.mapModel.removeLayersInAllLayerSet(layers: self.mapView.style!.layers)
         self.mapModel.apllyLayerSettingsForAllLayerSets(layers: self.mapView.style!.layers)
-        let archivedData = NSKeyedArchiver.archivedData(withRootObject: mapModel)
+        let archivedData = try! NSKeyedArchiver.archivedData(withRootObject: mapModel!, requiringSecureCoding: false)
         let outputPath = NSHomeDirectory() + "/Documents/maps/" + mapName + ".vgs"
         do {
-            try? archivedData.write(to: URL(fileURLWithPath: outputPath))
+            try archivedData.write(to: URL(fileURLWithPath: outputPath))
         } catch {
             self.showDialog(title:"Failure", message:"Error occured!")
             return
@@ -244,6 +226,21 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
         } else {
             self.mapView.userTrackingMode = .followWithHeading
         }
+    }
+}
+
+extension MapViewController:MGLMapViewDelegate {
+    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        return true
+    }
+    
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+        self.initUserLocation()
+    }
+    
+    //mapviewの描画完了後、ベースマップのsourcesとlayersを保存
+    func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
+        self.mapModel.showAllLayer(mapView: mapView)
     }
 }
 
