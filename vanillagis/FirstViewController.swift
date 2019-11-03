@@ -59,11 +59,10 @@ class FirstViewController: UIViewController {
     func createDocumentDir() {
         let fm = FileManager.default
         let documentsPath = NSHomeDirectory() + "/Documents"
-        let mapsDir = "/maps"
-        let geojsonsDir = "/geojsons"
         do {
-            try fm.createDirectory(atPath: (documentsPath + mapsDir) , withIntermediateDirectories: false, attributes: [:])
-            try fm.createDirectory(atPath: (documentsPath + geojsonsDir) , withIntermediateDirectories: false, attributes: [:])
+            try fm.createDirectory(atPath: (documentsPath + "/styles") , withIntermediateDirectories: false, attributes: [:])
+            try fm.createDirectory(atPath: (documentsPath + "/maps") , withIntermediateDirectories: false, attributes: [:])
+            try fm.createDirectory(atPath: (documentsPath + "geojsons") , withIntermediateDirectories: false, attributes: [:])
         } catch {
         }
     }

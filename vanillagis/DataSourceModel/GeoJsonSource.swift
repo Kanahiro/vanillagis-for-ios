@@ -64,4 +64,15 @@ struct GeoJsonSource:DataSourceModel {
         }
         return layerType!
     }
+    
+    func getCRS() -> String {
+        guard let jsonObj = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] else {
+            preconditionFailure("Failed to parse JSON file")
+        }
+        let crsObj = jsonObj["crs"] as! [String:Any]
+        let crsProps = crsObj["properties"] as! [String:Any]
+        let crsName = crsProps["name"] as! String
+        return crsName
+        //sample: WGS84 => urn:ogc:def:crs:EPSG::4326
+    }
 }

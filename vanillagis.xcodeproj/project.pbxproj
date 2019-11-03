@@ -27,6 +27,9 @@
 		9335016E232B7D31006CFCCA /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9335016D232B7D31006CFCCA /* MapModel.swift */; };
 		93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350170232BBEC9006CFCCA /* MapStyleManager.swift */; };
 		93350173232E5876006CFCCA /* ShapefileSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93350172232E5876006CFCCA /* ShapefileSourceModel.swift */; };
+		9354D24E236DAF220036E947 /* BasemapSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354D24D236DAF220036E947 /* BasemapSelectionViewController.swift */; };
+		9354D253236E8FC30036E947 /* launchscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9354D252236E8FC30036E947 /* launchscreen.png */; };
+		9354D257236EB3BF0036E947 /* img_1.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 9354D256236EB3BF0036E947 /* img_1.PNG */; };
 		93680CB52346027C00E928B8 /* LayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93680CB42346027C00E928B8 /* LayerViewController.swift */; };
 		93680CBE234881F400E928B8 /* LayerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93680CBC234881F400E928B8 /* LayerViewCell.swift */; };
 		93680CBF234881F400E928B8 /* LayerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93680CBD234881F400E928B8 /* LayerViewCell.xib */; };
@@ -83,6 +86,9 @@
 		93350170232BBEC9006CFCCA /* MapStyleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyleManager.swift; sourceTree = "<group>"; };
 		93350172232E5876006CFCCA /* ShapefileSourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapefileSourceModel.swift; sourceTree = "<group>"; };
 		93350174232E63E1006CFCCA /* test.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.geojson; sourceTree = "<group>"; };
+		9354D24D236DAF220036E947 /* BasemapSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasemapSelectionViewController.swift; sourceTree = "<group>"; };
+		9354D252236E8FC30036E947 /* launchscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchscreen.png; sourceTree = "<group>"; };
+		9354D256236EB3BF0036E947 /* img_1.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_1.PNG; sourceTree = "<group>"; };
 		93680CB42346027C00E928B8 /* LayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerViewController.swift; sourceTree = "<group>"; };
 		93680CBC234881F400E928B8 /* LayerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerViewCell.swift; sourceTree = "<group>"; };
 		93680CBD234881F400E928B8 /* LayerViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LayerViewCell.xib; sourceTree = "<group>"; };
@@ -158,14 +164,14 @@
 			children = (
 				9301CF2B231D37CF007B8FBD /* AppDelegate.swift */,
 				9335016B232B240D006CFCCA /* FirstViewController.swift */,
-				9324587723606B54002E0D36 /* SettingViewController.swift */,
-				9324587B23606BC5002E0D36 /* SettingViewController.storyboard */,
+				9354D254236EB2580036E947 /* SettingView */,
 				938BED44235364E400B19A81 /* MapView */,
 				9335016F232BBEAF006CFCCA /* Utils */,
 				93350165232A36CE006CFCCA /* DataSourceModel */,
 				93350168232A450C006CFCCA /* Model */,
 				9301CF32231D37D1007B8FBD /* Assets.xcassets */,
 				9301CF34231D37D1007B8FBD /* LaunchScreen.storyboard */,
+				9354D252236E8FC30036E947 /* launchscreen.png */,
 				9301CF37231D37D1007B8FBD /* Info.plist */,
 				93067229231E9CC0004F1CCA /* default.json */,
 				93350174232E63E1006CFCCA /* test.geojson */,
@@ -219,6 +225,32 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		9354D24C236DAEE50036E947 /* BasemapSelection */ = {
+			isa = PBXGroup;
+			children = (
+				9354D24D236DAF220036E947 /* BasemapSelectionViewController.swift */,
+			);
+			path = BasemapSelection;
+			sourceTree = "<group>";
+		};
+		9354D254236EB2580036E947 /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				9324587723606B54002E0D36 /* SettingViewController.swift */,
+				9324587B23606BC5002E0D36 /* SettingViewController.storyboard */,
+				9354D255236EB3A80036E947 /* imgs */,
+			);
+			path = SettingView;
+			sourceTree = "<group>";
+		};
+		9354D255236EB3A80036E947 /* imgs */ = {
+			isa = PBXGroup;
+			children = (
+				9354D256236EB3BF0036E947 /* img_1.PNG */,
+			);
+			path = imgs;
+			sourceTree = "<group>";
+		};
 		93680CC22348AF3600E928B8 /* LayerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				9301CF2D231D37CF007B8FBD /* MapViewController.swift */,
+				9354D24C236DAEE50036E947 /* BasemapSelection */,
 				93680CC22348AF3600E928B8 /* LayerView */,
 				93E56BD62353796B00E0CCDC /* AttributesWindow */,
 				93182A70232F5AFC000DC0C1 /* DocumentsViewController.swift */,
@@ -367,10 +400,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9354D253236E8FC30036E947 /* launchscreen.png in Resources */,
 				9324587C23606BC5002E0D36 /* SettingViewController.storyboard in Resources */,
 				93680CBF234881F400E928B8 /* LayerViewCell.xib in Resources */,
 				93182A6F232E7201000DC0C1 /* test.geojson in Resources */,
 				9301CF36231D37D1007B8FBD /* LaunchScreen.storyboard in Resources */,
+				9354D257236EB3BF0036E947 /* img_1.PNG in Resources */,
 				9301CF33231D37D1007B8FBD /* Assets.xcassets in Resources */,
 				9306722C231EAA52004F1CCA /* sample.geojson in Resources */,
 				93D79229234B657800E78980 /* LayerEditViewController.storyboard in Resources */,
@@ -452,6 +487,7 @@
 				9335016C232B240D006CFCCA /* FirstViewController.swift in Sources */,
 				938BED43235363C100B19A81 /* AttributesWindowView.swift in Sources */,
 				93D791E6234A1C1300E78980 /* LayerEditViewController.swift in Sources */,
+				9354D24E236DAF220036E947 /* BasemapSelectionViewController.swift in Sources */,
 				93680CBE234881F400E928B8 /* LayerViewCell.swift in Sources */,
 				93350171232BBEC9006CFCCA /* MapStyleManager.swift in Sources */,
 				93182A71232F5AFC000DC0C1 /* DocumentsViewController.swift in Sources */,
@@ -626,7 +662,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.1.0;
 				DEVELOPMENT_TEAM = 8WN4A2PC78;
 				INFOPLIST_FILE = vanillagis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -634,7 +670,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagis;
 				PRODUCT_NAME = "Vanilla GIS";
 				SWIFT_VERSION = 5.0;
@@ -648,7 +684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.1.0;
 				DEVELOPMENT_TEAM = 8WN4A2PC78;
 				INFOPLIST_FILE = vanillagis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -656,7 +692,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Labo288.vanillagis;
 				PRODUCT_NAME = "Vanilla GIS";
 				SWIFT_VERSION = 5.0;

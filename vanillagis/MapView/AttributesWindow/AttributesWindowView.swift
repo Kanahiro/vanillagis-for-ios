@@ -21,7 +21,7 @@ class AttributesWindowView: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView.allowsSelection = false
         tableView.rowHeight = 30
         tableView.isOpaque = false
-        tableView.backgroundColor = UIColor(white: 0, alpha: 0.6)
+        tableView.backgroundColor = UIColor(white: 0, alpha: 0.8)
         tableView.delegate = self
         tableView.dataSource = self
         

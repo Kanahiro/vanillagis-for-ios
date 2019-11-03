@@ -11,6 +11,10 @@ import UIKit
 import Mapbox
 
 class MapModel: NSObject, NSCoding {
+    //class vars
+    var name: String
+    var layerSets: [LayerSet]
+    
     //NSCoding protocol
     func encode(with coder: NSCoder) {
         coder.encode(self.name, forKey: "name")
@@ -22,12 +26,9 @@ class MapModel: NSObject, NSCoding {
         self.layerSets = coder.decodeObject(forKey: "layerSets") as! [LayerSet]
     }
     
-    //class vars
-    var name: String = "Unnamed"
-    var layerSets: [LayerSet] = []
-    
     init(name:String) {
         self.name = name
+        self.layerSets = []
     }
     
     init(name:String, layerSets:[LayerSet]) {
@@ -36,11 +37,21 @@ class MapModel: NSObject, NSCoding {
     }
     
     func showLayer(mapView:MGLMapView, layerSet:LayerSet) {
-        let source = self.makeSource(layerSet: layerSet)
-        let layer = self.makeLayer(layerSet: layerSet)
-        
-        mapView.style!.addSource(source)
-        mapView.style!.addLayer(layer)
+        DispatchQueue.global(qos: .userInitiated).async {
+            let source = self.makeSource(layerSet: layerSet)
+            let layer = self.makeLayer(layerSet: layerSet)
+            DispatchQueue.main.async {
+                let sourcesInMapView = mapView.style?.sources
+                //sourcesが空なら中断
+                if sourcesInMapView == nil { return }
+                //sourcesに既にsourceが含まれているなら中断
+                for s in sourcesInMapView! {
+                    if (source.identifier == s.identifier) { return }
+                }
+                mapView.style!.addSource(source)
+                mapView.style!.addLayer(layer)
+            }
+        }
     }
     
     func showAllLayer(mapView:MGLMapView) {
@@ -97,9 +108,8 @@ class MapModel: NSObject, NSCoding {
                                                                          green: layerSet.setting["green"] as! CGFloat,
                                                                          blue: layerSet.setting["blue"] as! CGFloat) )
             layer.lineOpacity = NSExpression(forConstantValue:layerSet.setting["opacity"])
-            layer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", [14: 2, 18: 20])
+            layer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", [15: 1, 18: 2])
             return layer
-            
         case "polygon":
             let layer = MGLFillStyleLayer(identifier: layerSet.identifier, source: source)
             layer.fillOutlineColor = NSExpression(forConstantValue: UIColor(red: 1, green: 1, blue: 1, alpha: 1))
@@ -108,7 +118,6 @@ class MapModel: NSObject, NSCoding {
                                                                         blue: layerSet.setting["blue"] as! CGFloat) )
             layer.fillOpacity = NSExpression(forConstantValue: layerSet.setting["opacity"])
             return layer
-            
         default:
             if (layerSet.setting["heatmap"] as! Bool) {
                 let layer = MGLHeatmapStyleLayer(identifier: layerSet.identifier, source: source)
@@ -124,7 +133,7 @@ class MapModel: NSObject, NSCoding {
                                                                                 blue: layerSet.setting["blue"] as! CGFloat) )
                 layer.circleOpacity = NSExpression(forConstantValue: layerSet.setting["opacity"])
                 layer.circleRadius = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'exponential', 1.75, %@)",
-                                                  [12: 5,
+                                                  [10: 5,
                                                    18: 25])
                 return layer
             }

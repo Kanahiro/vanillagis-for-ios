@@ -11,6 +11,7 @@ import Foundation
 struct MapStyleManager {
     private var style:[String:Any] = [
         "version":8,
+        "name":"basemap",
         "sources":[],
         "layers":[],
     ]
@@ -31,6 +32,8 @@ struct MapStyleManager {
     }
     
     mutating func setBasemap(name:String, tileUrlStr:String, attributionUrl:String="", tileSize:Int=256) {
+        self.style["name"] = name
+        
         let sources = [
             name:[
                 "type":"raster",

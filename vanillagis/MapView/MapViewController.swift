@@ -21,6 +21,7 @@ class MapViewController: UIViewController {
         self.setMapTitle()
         
         self.initMapView()
+        self.initButtons()
         self.initAnnotationTableView()
         self.initToolbar()
     }
@@ -31,13 +32,6 @@ class MapViewController: UIViewController {
         }
         self.title = self.mapModel.name
     }
-
-    func makeDefaultStyleURL() -> URL? {
-        var msManager = MapStyleManager()
-        msManager.applyDefault()
-        //write temp-jsonfile as tmp.json, because MGLMapView needs styleURL to initialize.
-        return msManager.writeJson(outputDir: "/tmp", filename: "style")
-    }
     
     func initMapView() {
         // ステータスバーの高さを取得
@@ -46,13 +40,20 @@ class MapViewController: UIViewController {
         let navBarHeight = self.navigationController?.navigationBar.frame.size.height
         //mapViewエリアを設定
         let rect = CGRect(x: 0, y: statusBarHeight + navBarHeight!, width: self.view.bounds.size.width, height: self.view.bounds.size.height - (statusBarHeight + navBarHeight! + 42))
-        
-        mapView = MGLMapView(frame: rect, styleURL: self.makeDefaultStyleURL()!)
+        var msManager = MapStyleManager()
+        msManager.applyDefault()
+        let styleUrl = msManager.writeJson(outputDir:"/tmp", filename:"style")
+        mapView = MGLMapView(frame: rect, styleURL: styleUrl)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.setCenter(CLLocationCoordinate2D(latitude: 38.0, longitude: 135.0), zoomLevel: 3, animated: false)
         mapView.maximumZoomLevel = 18
-        mapView.minimumZoomLevel = 0
+        mapView.minimumZoomLevel = 2
         mapView.backgroundColor = .white
+        mapView.logoViewPosition = MGLOrnamentPosition.bottomLeft
+        mapView.showsScale = true
+        mapView.scaleBarPosition = MGLOrnamentPosition.bottomRight
+        mapView.compassViewPosition = MGLOrnamentPosition.topLeft
+        mapView.attributionButtonPosition = MGLOrnamentPosition.topRight
         mapView.delegate = self
         
         self.view.addSubview(mapView)
@@ -79,6 +80,17 @@ class MapViewController: UIViewController {
         // Access the features at that point within the state layer.
         let features = mapView.visibleFeatures(at: spot)
         toggleAnnotationWindow(features: features)
+    }
+    
+    func initButtons() {
+        let changeBtn = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(self.pushChangeButton(sender:)))
+        self.navigationItem.rightBarButtonItem = changeBtn
+    }
+    
+    @objc func pushChangeButton(sender: UIButton){
+        let basemapSelectionVC = BasemapSelectionViewController()
+        basemapSelectionVC.mapView = self.mapView
+        self.present(basemapSelectionVC, animated: true, completion: nil)
     }
     
     //属性表示ウィンドウの初期化
@@ -238,7 +250,6 @@ extension MapViewController:MGLMapViewDelegate {
         self.initUserLocation()
     }
     
-    //mapviewの描画完了後、ベースマップのsourcesとlayersを保存
     func mapViewDidFinishRenderingMap(_ mapView: MGLMapView, fullyRendered: Bool) {
         self.mapModel.showAllLayer(mapView: mapView)
     }

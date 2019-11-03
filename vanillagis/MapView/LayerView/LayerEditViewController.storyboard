@@ -10,7 +10,7 @@
         <!--Layer Edit View Controller-->
         <scene sceneID="hRD-lt-Nhk">
             <objects>
-                <tableViewController storyboardIdentifier="layerEditView" id="dhz-Fp-hI2" customClass="LayerEditViewController" customModule="vanillagis" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="layerEditView" id="dhz-Fp-hI2" customClass="LayerEditViewController" customModule="Vanilla_GIS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="z9w-7E-G01">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

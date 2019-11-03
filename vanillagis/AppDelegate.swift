@@ -28,17 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        let jsonUrl = url
-
-        let geojson = GeoJsonSource(filepath:jsonUrl)
+        let fileUrl = url
         
-        var newMapModel = MapModel(name: "New Map")
-
-        
-        let mapVc = MapViewController()
-        //mapVc.mapModel = newMapModel
-        
-        self.window?.rootViewController?.present(mapVc, animated: true, completion: nil)
+        let geojsonData = try! Data(contentsOf: fileUrl)
+        let outputPath = NSHomeDirectory() + "/Documents/geojsons"
+        do {
+            try geojsonData.write(to: URL(fileURLWithPath: outputPath))
+        } catch {
+            
+        }
         return true
     }
 

@@ -13,7 +13,6 @@ import ColorSlider
 class LayerEditViewController: UITableViewController {
     
     //raster
-    @IBOutlet weak var tileUrlLabel: UILabel!
     @IBOutlet weak var rasterOpacity: UISlider!
     
     //polygon
@@ -242,7 +241,7 @@ class LayerEditViewController: UITableViewController {
                     self.mapView.style!.removeLayer(self.layer)
                     self.mapView.style!.removeSource(self.mapView.style!.source(withIdentifier: self.layer.identifier)!)
                     let superVC = self.presentingViewController as! LayerViewController
-                    superVC.updateTableView()
+                    superVC.tableView.reloadData()
                     self.dismiss(animated: true, completion: nil)
             }
         )
